@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:bab="clr-namespace:Caliburn.Micro.BindableAppBar;assembly=Caliburn.Micro.BindableAppBar"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -35,6 +36,13 @@
                 </Button.Template>
             </Button>
         </Grid>
+
+        <bab:BindableAppBar x:Name="Normal" IsVisible="True" BackgroundColor="White" ForegroundColor="Black">
+            <bab:BindableAppBarButton x:Name="Add" Text="Front camera" IconUri="/Resources/Assets/Buttons/SwitchCamera.png"/>
+            <bab:BindableAppBarButton x:Name="Badges" Text="Badges" IconUri="/Resources/Assets/Buttons/Badges.png"/>
+            <bab:BindableAppBarButton x:Name="Info" Text="YesEquality" IconUri="/Resources/Assets/Buttons/Info.png"/>
+            <bab:BindableAppBarMenuItem x:Name="About" Text="About this app" />
+        </bab:BindableAppBar>
     </Grid>
 
 </phone:PhoneApplicationPage>

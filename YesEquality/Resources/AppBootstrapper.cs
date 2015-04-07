@@ -7,6 +7,8 @@ using Microsoft.Phone.Shell;
 using Microsoft.Phone.Controls;
 using YesEquality.ViewModels;
 using System.Windows.Navigation;
+using Caliburn.Micro.BindableAppBar;
+using System.Windows.Controls;
 
 namespace YesEquality
 {
@@ -106,7 +108,8 @@ namespace YesEquality
 
         static void AddCustomConventions()
         {
-
+            ConventionManager.AddElementConvention<BindableAppBarButton>(Control.IsEnabledProperty, "DataContext", "Click");
+            ConventionManager.AddElementConvention<BindableAppBarMenuItem>(Control.IsEnabledProperty, "DataContext", "Click");
         }
     }
 }
