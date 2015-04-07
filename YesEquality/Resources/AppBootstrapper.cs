@@ -61,6 +61,7 @@ namespace YesEquality
 
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
+            ThemeManager.ToLightTheme();
         }
 
         protected override void OnLaunch(object sender, LaunchingEventArgs e)

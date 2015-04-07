@@ -12,19 +12,28 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
-   
+
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="480" />
+            <RowDefinition Height="220" />
         </Grid.RowDefinitions>
-    
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="YES EQUALITY" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
-        </StackPanel>
-   
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
 
+        <!-- Viewfinder -->
+        <Grid Grid.Row="1" Background="#dedede">
+            
+        </Grid>
+
+        <!-- Camera button -->
+        <Grid Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button x:Name="ShutterButton" Height="70" Width="70" Margin="0">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Source="/Resources/Assets/Buttons/Camera.png"/>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
         </Grid>
     </Grid>
 
