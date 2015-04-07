@@ -34,6 +34,9 @@ namespace YesEquality
 
             // Define VMs
             container.PerRequest<MainViewModel>();
+            container.PerRequest<InfoViewModel>();
+            container.PerRequest<BadgeViewModel>();
+            container.PerRequest<AboutViewModel>();
             
             // Add custom binding conventions
             AddCustomConventions();
