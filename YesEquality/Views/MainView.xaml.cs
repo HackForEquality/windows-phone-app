@@ -8,7 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
-namespace YesEquality
+namespace YesEquality.Views
 {
     public partial class MainView : PhoneApplicationPage
     {

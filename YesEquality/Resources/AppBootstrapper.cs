@@ -24,6 +24,8 @@ namespace YesEquality
         }
         protected override void Configure()
         {
+            LogManager.GetLog = t => new DebugLog(t);
+
             container = new PhoneContainer();
             if (!Execute.InDesignMode)
             {

@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="YesEquality.MainView"
+    x:Class="YesEquality.Views.MainView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -18,7 +18,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="480" />
-            <RowDefinition Height="220" />
+            <RowDefinition Height="120" />
         </Grid.RowDefinitions>
 
         <!-- Viewfinder -->
@@ -36,12 +36,13 @@
                 </Button.Template>
             </Button>
         </Grid>
-
-        <bab:BindableAppBar x:Name="Normal" IsVisible="True" BackgroundColor="White" ForegroundColor="Black">
-            <bab:BindableAppBarButton x:Name="Add" Text="Front camera" IconUri="/Resources/Assets/Buttons/SwitchCamera.png"/>
-            <bab:BindableAppBarButton x:Name="Badges" Text="Badges" IconUri="/Resources/Assets/Buttons/Badges.png"/>
-            <bab:BindableAppBarButton x:Name="Info" Text="YesEquality" IconUri="/Resources/Assets/Buttons/Info.png"/>
-            <bab:BindableAppBarMenuItem x:Name="About" Text="About this app" />
+        
+        <!-- AppBar -->
+        <bab:BindableAppBar x:Name="Normal" BackgroundColor="White" ForegroundColor="Black">
+            <bab:BindableAppBarButton x:Name="SwitchCamera" Text="Switch" IconUri="/Resources/Assets/Buttons/SwitchCamera.png"/>
+            <bab:BindableAppBarButton x:Name="GoToBadges" Text="Badges" IconUri="/Resources/Assets/Buttons/Badges.png"/>
+            <bab:BindableAppBarButton x:Name="GoToInfo" Text="Yes Equality" IconUri="/Resources/Assets/Buttons/Info.png"/>
+            <bab:BindableAppBarMenuItem x:Name="GoToAbout" Text="About the app" />
         </bab:BindableAppBar>
     </Grid>
 
