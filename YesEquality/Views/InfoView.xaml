@@ -5,6 +5,7 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
+    xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -21,7 +22,7 @@
         </Grid.RowDefinitions>
         
         <!-- Slide View -->
-        <telerikPrimitives:RadSlideView Grid.RowSpan="2" x:Name="SlideView" ItemsSource="{Binding InfoList}" ItemRealizationMode="ViewportItem" IsFilmstripModeEnabled="True" IsLoopingEnabled="True">
+        <telerikPrimitives:RadSlideView Grid.RowSpan="2" x:Name="SlideView" ItemsSource="{Binding InfoList}" IsFilmstripModeEnabled="True" IsLoopingEnabled="True">
             <telerikPrimitives:RadSlideView.ItemTemplate>
                 <DataTemplate>
                     <Grid Background="{Binding BackgroundColour}">

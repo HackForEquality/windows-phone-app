@@ -153,8 +153,17 @@
     <Content Include="Resources\Assets\Buttons\Info.png" />
     <Content Include="Resources\Assets\Buttons\SwitchCamera.png" />
     <Content Include="Resources\Assets\Buttons\Camera.png" />
+    <Content Include="Resources\Assets\Info\10_AtWork.png" />
+    <Content Include="Resources\Assets\Info\11_Address.png" />
     <Content Include="Resources\Assets\Info\1_Over18.png" />
     <Content Include="Resources\Assets\Info\2_IrishCitizen.png" />
+    <Content Include="Resources\Assets\Info\3_Resident.png" />
+    <Content Include="Resources\Assets\Info\4_Registered.png" />
+    <Content Include="Resources\Assets\Info\5_Check.png" />
+    <Content Include="Resources\Assets\Info\6_Download.png" />
+    <Content Include="Resources\Assets\Info\7_Fillin.png" />
+    <Content Include="Resources\Assets\Info\8_PostForms.png" />
+    <Content Include="Resources\Assets\Info\9_Student.png" />
     <Content Include="Resources\Assets\Tiles\FlipCycleTileLarge.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
