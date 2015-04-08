@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -13,8 +14,48 @@
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
 
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <TextBlock Text="INFO" Margin="24,12,0,0" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Foreground="{StaticResource PhoneForegroundBrush}" FontSize="{StaticResource PhoneFontSizeMedium}"/>
+    <Grid Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Slide View -->
+        <telerikPrimitives:RadSlideView Grid.RowSpan="2" x:Name="SlideView" ItemsSource="{Binding InfoList}" ItemRealizationMode="ViewportItem" IsFilmstripModeEnabled="True" IsLoopingEnabled="True">
+            <telerikPrimitives:RadSlideView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Background="{Binding BackgroundColour}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="150"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="36"/>
+                            <RowDefinition Height="300"/>
+                            <RowDefinition Height="36"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="1" TextAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Title}" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="White" Width="400"/>
+                        <Image Grid.Row="3" HorizontalAlignment="Center" Source="{Binding ImagePath}" Stretch="Uniform" Width="300" Height="300" />
+                        <TextBlock Grid.Row="5" TextAlignment="Center"  HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding ImageText}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" Foreground="White" Width="400"/>
+                    </Grid>
+                </DataTemplate>
+            </telerikPrimitives:RadSlideView.ItemTemplate>
+        </telerikPrimitives:RadSlideView>
+
+        <!-- Pagination Control -->
+        <telerikPrimitives:RadPaginationControl Grid.Row="1" PageProvider="{Binding ElementName=SlideView}" DisplayMode="Thumbnails" HorizontalAlignment="Center">
+            <telerikPrimitives:RadPaginationControl.ItemTemplate>
+                <DataTemplate>
+                    <Ellipse Width="8" Height="8" Stroke="{StaticResource PhoneBackgroundBrush}" StrokeThickness="2" Margin="12"/>
+                </DataTemplate>
+            </telerikPrimitives:RadPaginationControl.ItemTemplate>
+            <telerikPrimitives:RadPaginationControl.CurrentItemTemplate>
+                <DataTemplate>
+                    <Ellipse Width="12" Height="12" Fill="{StaticResource PhoneBackgroundBrush}" Margin="8"/>
+                </DataTemplate>
+            </telerikPrimitives:RadPaginationControl.CurrentItemTemplate>
+        </telerikPrimitives:RadPaginationControl>
     </Grid>
 
 </phone:PhoneApplicationPage>
