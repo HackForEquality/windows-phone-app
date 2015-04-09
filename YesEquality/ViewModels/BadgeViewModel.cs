@@ -8,11 +8,14 @@ namespace YesEquality.ViewModels
 {
     public class BadgeViewModel : Conductor<IScreen>.Collection.OneActive
     {
+        private readonly INavigationService navigationService;
         private readonly BadgeListViewModel whiteBadges;
         private readonly BadgeListViewModel colourBadges;
 
-        public BadgeViewModel(BadgeListViewModel whiteBadges, BadgeListViewModel colourBadges)
+        public BadgeViewModel(INavigationService navigationService, BadgeListViewModel whiteBadges, BadgeListViewModel colourBadges)
         {
+            this.navigationService = navigationService;
+
             this.whiteBadges = whiteBadges;
             this.colourBadges = colourBadges;
 
@@ -48,7 +51,15 @@ namespace YesEquality.ViewModels
             return badges;
         }
         #region Commands
-
+        public void Save()
+        {
+            navigationService.GoBack();
+        }
+        
+        public void cancel()
+        {
+            navigationService.GoBack();
+        }
         #endregion
     }
 }

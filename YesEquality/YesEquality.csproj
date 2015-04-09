@@ -96,6 +96,7 @@
     </Compile>
     <Compile Include="Models\BadgeModel.cs" />
     <Compile Include="Models\InfoModel.cs" />
+    <Compile Include="Models\Messages\CommandMessage.cs" />
     <Compile Include="Resources\Converters\BooleanToAppBarModeConverter.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\BadgeListViewModel.cs" />
@@ -169,6 +170,8 @@
     <Content Include="Resources\Assets\Badges\White\YES_Me.png" />
     <Content Include="Resources\Assets\Badges\White\YES_WereVoting.png" />
     <Content Include="Resources\Assets\Badges\White\YES.png" />
+    <Content Include="Resources\Assets\Buttons\Cancel.png" />
+    <Content Include="Resources\Assets\Buttons\Ok.png" />
     <Content Include="Resources\Assets\Buttons\Link.png" />
     <Content Include="Resources\Assets\Buttons\Badges.png" />
     <Content Include="Resources\Assets\Buttons\Info.png" />

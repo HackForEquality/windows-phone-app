@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:bab="clr-namespace:Caliburn.Micro.BindableAppBar;assembly=Caliburn.Micro.BindableAppBar"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -14,6 +15,7 @@
     shell:SystemTray.IsVisible="True">
 
     <Grid>
+        <!-- Badges Pivot -->
         <phone:Pivot x:Name="Items" Title="" Margin="0">
             <phone:Pivot.TitleTemplate>
                 <DataTemplate>
@@ -27,6 +29,12 @@
                 </DataTemplate>
             </phone:Pivot.HeaderTemplate>
         </phone:Pivot>
+
+        <!-- AppBar -->
+        <bab:BindableAppBar x:Name="Normal" BackgroundColor="White" ForegroundColor="Black">
+            <bab:BindableAppBarButton x:Name="Save" Text="Save" IconUri="/Resources/Assets/Buttons/Ok.png"/>
+            <bab:BindableAppBarButton x:Name="Cancel" Text="Cancel" IconUri="/Resources/Assets/Buttons/Cancel.png"/>
+        </bab:BindableAppBar>
     </Grid>
 
 </phone:PhoneApplicationPage>

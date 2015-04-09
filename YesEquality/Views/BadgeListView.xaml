@@ -6,18 +6,26 @@
     xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives" 
     xmlns:telerikCore="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Core" 
     xmlns:DataBoundListBox="clr-namespace:Telerik.Windows.Controls.DataBoundListBox;assembly=Telerik.Windows.Controls.Primitives" 
+    xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform" 
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}">
-
-    <Grid Margin="0,0,0,40">
-        <telerikPrimitives:RadDataBoundListBox ItemsSource="{Binding Badges}">
+		
+    <Grid Margin="12,0,0,0">
+        <telerikPrimitives:RadDataBoundListBox 
+            x:Name="BadgeList"
+            IsCheckModeEnabled="True"
+            IsCheckModeActive="True"
+            CheckModeDeactivatedOnBackButton="False"
+            telerikCore:InteractionEffectManager.IsInteractionEnabled="True"
+            cal:Message.Attach="[Event ItemCheckedStateChanging] = [Action ItemCheckedStateChanging($eventArgs)]"
+            ItemsSource="{Binding Badges}">
 
             <!-- Item template -->
             <telerikPrimitives:RadDataBoundListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Background="#dedede" Margin="12,0,12,12">
+                    <Grid Background="#dedede" Margin="0,0,24,24">
                         <Image Margin="12" Source="{Binding ImagePath}" Width="160" Height="160" Stretch="Uniform" />
                     </Grid>
                 </DataTemplate>
