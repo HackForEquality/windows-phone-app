@@ -5,10 +5,14 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:local="clr-namespace:YesEquality"
+    xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform" 
+    xmlns:converter="clr-namespace:YesEquality.Resources.Converters"
     >
-
     <Application.Resources>
         <local:AppBootstrapper x:Key="bootstrapper" />
+        
+        <!-- Converters -->
+        <!--<cal:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>-->
+        <converter:BooleanToAppBarModeConverter x:Key="BooleanToAppBarModeConverter"/>
     </Application.Resources>
-
 </Application>

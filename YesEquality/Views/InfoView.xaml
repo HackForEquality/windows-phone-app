@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
     xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform" 
+    xmlns:bab="clr-namespace:Caliburn.Micro.BindableAppBar;assembly=Caliburn.Micro.BindableAppBar"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -22,7 +23,7 @@
         </Grid.RowDefinitions>
         
         <!-- Slide View -->
-        <telerikPrimitives:RadSlideView Grid.RowSpan="2" x:Name="SlideView" ItemsSource="{Binding InfoList}" IsFilmstripModeEnabled="True" IsLoopingEnabled="True">
+        <telerikPrimitives:RadSlideView Grid.RowSpan="2" cal:Message.Attach="[Event SelectionChanged] = [Action SelectionChanged($eventArgs)]" x:Name="SlideView" ItemsSource="{Binding InfoList}" IsFilmstripModeEnabled="True" IsLoopingEnabled="True">
             <telerikPrimitives:RadSlideView.ItemTemplate>
                 <DataTemplate>
                     <Grid Background="{Binding BackgroundColour}">
@@ -57,6 +58,11 @@
                 </DataTemplate>
             </telerikPrimitives:RadPaginationControl.CurrentItemTemplate>
         </telerikPrimitives:RadPaginationControl>
+
+        <!-- AppBar -->
+        <bab:BindableAppBar x:Name="Normal" BackgroundColor="White" ForegroundColor="Black" Mode="{Binding ExpandAppBar, Converter={StaticResource BooleanToAppBarModeConverter}}">
+            <bab:BindableAppBarButton x:Name="GoToWebsite" Text="Visit" IconUri="/Resources/Assets/Buttons/Link.png"/>
+        </bab:BindableAppBar>
     </Grid>
 
 </phone:PhoneApplicationPage>

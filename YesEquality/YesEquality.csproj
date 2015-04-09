@@ -95,6 +95,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\InfoModel.cs" />
+    <Compile Include="Resources\Converters\BooleanToAppBarModeConverter.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\BadgeViewModel.cs" />
     <Compile Include="ViewModels\InfoViewModel.cs" />
@@ -149,6 +150,7 @@
     <Content Include="Resources\Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Assets\Buttons\Link.png" />
     <Content Include="Resources\Assets\Buttons\Badges.png" />
     <Content Include="Resources\Assets\Buttons\Info.png" />
     <Content Include="Resources\Assets\Buttons\SwitchCamera.png" />
