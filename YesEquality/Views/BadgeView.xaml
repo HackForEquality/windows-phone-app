@@ -12,9 +12,21 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
-    
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <TextBlock Text="BADGES" Margin="24,12,0,0" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Foreground="{StaticResource PhoneForegroundBrush}" FontSize="{StaticResource PhoneFontSizeMedium}"/>
+
+    <Grid>
+        <phone:Pivot x:Name="Items" Title="" Margin="0">
+            <phone:Pivot.TitleTemplate>
+                <DataTemplate>
+                    <TextBlock Text="CHOOSE A BADGE..." Margin="0,-1,0,-3" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Foreground="{StaticResource PhoneForegroundBrush}" FontSize="{StaticResource PhoneFontSizeMedium}"/>
+                </DataTemplate>
+            </phone:Pivot.TitleTemplate>
+
+            <phone:Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding DisplayName}" />
+                </DataTemplate>
+            </phone:Pivot.HeaderTemplate>
+        </phone:Pivot>
     </Grid>
 
 </phone:PhoneApplicationPage>

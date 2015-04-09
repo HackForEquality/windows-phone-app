@@ -40,6 +40,7 @@ namespace YesEquality
             container.PerRequest<MainViewModel>();
             container.PerRequest<InfoViewModel>();
             container.PerRequest<BadgeViewModel>();
+            container.PerRequest<BadgeListViewModel>();
             container.PerRequest<AboutViewModel>();
             
             // Add custom binding conventions
