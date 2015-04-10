@@ -11,6 +11,8 @@ namespace YesEquality
 {
     public partial class App : Application
     {
+        public static PhoneApplicationFrame RootFrame { get; private set; }
+
         /// <summary>
         /// Constructor for the Application object.
         /// </summary>

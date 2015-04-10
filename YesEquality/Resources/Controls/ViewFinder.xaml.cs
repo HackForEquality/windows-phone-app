@@ -7,7 +7,6 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using Microsoft.Xna.Framework.Media; 
 using System.IO;                     
 using Microsoft.Devices;
 using System.Windows.Media;
@@ -15,75 +14,85 @@ using System.Windows.Media.Imaging;
 using Windows.Phone.Media.Capture;
 using System.Threading.Tasks;
 using Windows.Storage.Streams;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.ComponentModel;
 
 namespace YesEquality.Controls
 {
     public partial class ViewFinder : UserControl
     {
-        PhotoCaptureDevice m_captureDevice;
-        double m_orientationAngle = 0.0;
-        CameraSensorLocation m_sensorLocation;
-        object m_parentPage;
-        bool m_previewRunning = false;
-
-        bool commandeRunning = false;
+        PhotoCaptureDevice captureDevice;
+        double orientationAngle = 0.0;
+        CameraSensorLocation sensorLocation;
+        object parentPage;
+        bool previewRunning = false;
+        bool commandRunning = false;
         public enum StrechMode
         {
             Uniform,
             UniformFill
         };
-        StrechMode m_Mode;
+        StrechMode mode;
+        
         public StrechMode Mode
         {
-            get { return m_Mode; }
+            get { return mode; }
             set
             {
-                if (!commandeRunning)
+                if (!commandRunning)
                 {
-                    m_Mode = value;
-                    computeVideoBruchTransform();
+                    mode = value;
+                    computeVideoBrushTransform();
                 }
             }
         }
+    
         public CameraSensorLocation SensorLocation
         {
-            get { return m_sensorLocation; }
+            get { return sensorLocation; }
             set
             {
-                if (!commandeRunning)
+                if (!commandRunning)
                 {
-                    m_sensorLocation = value;
-                    if (m_previewRunning)
+                    if (!PhotoCamera.IsCameraTypeSupported(CameraType.FrontFacing) && (value == CameraSensorLocation.Front))
+                    {
+                        sensorLocation = CameraSensorLocation.Back;
+                    }
+                    else
+                    {
+                        sensorLocation = value;
+                    }
+                    
+                    if (previewRunning)
+                    {
                         initCamera();
+                    }
                 }
-
             }
         }
 
-        public void start()
+        public void Start()
         {
-            m_previewRunning = true;
+            previewRunning = true;
             initCamera();
         }
 
-        public void strop()
+        public void Stop()
         {
-            m_previewRunning = false;
-            if (m_captureDevice != null)
+            previewRunning = false;
+            if (captureDevice != null)
             {
-                m_captureDevice.Dispose();
-                m_captureDevice = null;
-
+                captureDevice.Dispose();
+                captureDevice = null;
             }
         }
 
         public ViewFinder()
         {
             InitializeComponent();
+
             Mode = StrechMode.UniformFill;
             this.LayoutUpdated += ViewFinder_LayoutUpdated;
+            
             if (DesignerProperties.IsInDesignTool == false)
             {
                 AppBootstrapper bootstrapper = Application.Current.Resources["bootstrapper"] as AppBootstrapper;
@@ -92,27 +101,25 @@ namespace YesEquality.Controls
                 frame.Navigating += RootFrame_Navigating;
                 frame.Navigated += RootFrame_Navigated;
                 Tap += ViewFinder_Tap;
-                Loaded += (s, e) =>
-                {
-                    m_parentPage = frame.Content;
+                Loaded += ((s,e) => {
+                    parentPage = frame.Content;
                     setPageOrientation(frame.Orientation);
-
-                };
+                });
             };
         }
 
-        async void ViewFinder_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private async void ViewFinder_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            if (m_previewRunning && !commandeRunning)
+            if (previewRunning && !commandRunning)
             {
                 try
                 {
-                    commandeRunning = true;
+                    commandRunning = true;
 
                     //compute vector between preview picture center and Inverted transformation center
                     var tmp = viewfinderBrush.Transform.Inverse.TransformBounds(new Rect(new Point(), viewfinderCanvas.RenderSize));
-                    var dx = m_captureDevice.PreviewResolution.Width / 2 - (tmp.X + tmp.Width / 2);
-                    var dy = m_captureDevice.PreviewResolution.Height / 2 - (tmp.Y + tmp.Height / 2);
+                    var dx = captureDevice.PreviewResolution.Width / 2 - (tmp.X + tmp.Width / 2);
+                    var dy = captureDevice.PreviewResolution.Height / 2 - (tmp.Y + tmp.Height / 2);
         
                     //invert tap position
                     var p =  e.GetPosition(this);
@@ -123,214 +130,199 @@ namespace YesEquality.Controls
                     double Y = pInPreview.Y + dy;
 
                     if (X < 0) X = 0;
-                    if (X >= m_captureDevice.PreviewResolution.Width) X = m_captureDevice.PreviewResolution.Width - 1;
+                    if (X >= captureDevice.PreviewResolution.Width) X = captureDevice.PreviewResolution.Width - 1;
 
-                    if (Y >= m_captureDevice.PreviewResolution.Height) Y = m_captureDevice.PreviewResolution.Height - 1;
+                    if (Y >= captureDevice.PreviewResolution.Height) Y = captureDevice.PreviewResolution.Height - 1;
                     if (Y < 0) Y = 0;
 
-                    m_captureDevice.FocusRegion = new Windows.Foundation.Rect(
+                    captureDevice.FocusRegion = new Windows.Foundation.Rect(
                         new Windows.Foundation.Point(X, Y),
                         new Windows.Foundation.Size());
-                    await m_captureDevice.FocusAsync();
-
+                    
+                    await captureDevice.FocusAsync();
                 }
                 catch (Exception)
                 {
                 }
                 finally
                 {
-                    commandeRunning = false;
+                    commandRunning = false;
                 }
-
-
-
             }
         }
 
-        void RootFrame_Navigating(object sender, NavigatingCancelEventArgs e)
+        private void RootFrame_Navigating(object sender, NavigatingCancelEventArgs e)
         {
-            if (m_captureDevice != null)
+            if (captureDevice != null)
             {
-                m_captureDevice.Dispose();
-                m_captureDevice = null;
-
+                captureDevice.Dispose();
+                captureDevice = null;
             }
         }
 
-        void RootFrame_Navigated(object sender, NavigationEventArgs e)
+        private void RootFrame_Navigated(object sender, NavigationEventArgs e)
         {
-            if (m_parentPage != null && m_parentPage == e.Content)
+            if (parentPage != null && parentPage == e.Content)
             {
-                if (m_previewRunning)
+                if (previewRunning)
+                {
                     initCamera();
-            }
+                }
+}
         }
 
-        void setPageOrientation(PageOrientation orientation)
+        private void setPageOrientation(PageOrientation orientation)
         {
             if ((orientation & PageOrientation.Portrait) == PageOrientation.Portrait)
             {
-                m_orientationAngle = 0;
+                orientationAngle = 0;
             }
             else if ((orientation & PageOrientation.LandscapeLeft) == PageOrientation.LandscapeLeft)
             {
-                m_orientationAngle = -90;
+                orientationAngle = -90;
             }
             else
             {
-                m_orientationAngle = +90;
+                orientationAngle = +90;
             }
-            computeVideoBruchTransform();
+            
+            computeVideoBrushTransform();
         }
 
-
-        void RootFrame_OrientationChanged(object sender, OrientationChangedEventArgs e)
+        private void RootFrame_OrientationChanged(object sender, OrientationChangedEventArgs e)
         {
             setPageOrientation(e.Orientation);
         }
 
-
-
-        void ViewFinder_LayoutUpdated(object sender, EventArgs e)
+        private void ViewFinder_LayoutUpdated(object sender, EventArgs e)
         {
-            if (m_previewRunning)
-                computeVideoBruchTransform();
+            if (previewRunning)
+            {
+                computeVideoBrushTransform();
+            }
         }
 
-
-        async void initCamera()
+        private async void initCamera()
         {
-            if (commandeRunning)
+            if (commandRunning)
+            {
                 return;
+            }
+                
             try
             {
-                commandeRunning = true;
-                if (m_captureDevice != null)
+                commandRunning = true;
+
+                if (captureDevice != null)
                 {
-                    m_captureDevice.Dispose();
-                    m_captureDevice = null;
-
+                    captureDevice.Dispose();
+                    captureDevice = null;
                 }
-
-                // Use the back camera.
-                /*  var deviceName = Microsoft.Phone.Info.DeviceStatus.DeviceName;
-                  if (m_sensorLocation == CameraSensorLocation.Back && (deviceName.Contains("RM-875") || deviceName.Contains("RM-876") || deviceName.Contains("RM-877")))
-                  {
-                      m_captureDevice = await PhotoCaptureDevice.OpenAsync(CameraSensorLocation.Back, new Windows.Foundation.Size(7712, 4352));
-                      //m_captureDevice = await PhotoCaptureDevice.OpenAsync(CameraSensorLocation.Back,new Windows.Foundation.Size(7136,5360));
-
-                  }
-                  else if (m_sensorLocation == CameraSensorLocation.Back && (deviceName.Contains("RM-937") || deviceName.Contains("RM-938") || deviceName.Contains("RM-939")))
-                  {
-                      m_captureDevice = await PhotoCaptureDevice.OpenAsync(CameraSensorLocation.Back, new Windows.Foundation.Size(5376, 3024)); // 16:9 ratio
-                      //m_captureDevice = await PhotoCaptureDevice.OpenAsync(CameraSensorLocation.Back,new Windows.Foundation.Size(4992, 3744)); // 4:3 ratio
-                  }
-                  else*/
-                {
-                    var SupportedResolutions = PhotoCaptureDevice.GetAvailableCaptureResolutions(m_sensorLocation).ToArray();
-                    m_captureDevice = await PhotoCaptureDevice.OpenAsync(m_sensorLocation, SupportedResolutions[0]);
-                }
-
-                viewfinderBrush.SetSource(m_captureDevice);
-
-                computeVideoBruchTransform();
+                
+                var SupportedResolutions = PhotoCaptureDevice.GetAvailableCaptureResolutions(sensorLocation).ToArray();
+                captureDevice = await PhotoCaptureDevice.OpenAsync(sensorLocation, SupportedResolutions[0]);
+                viewfinderBrush.SetSource(captureDevice);
+                computeVideoBrushTransform();
             }
-
             finally
             {
-                commandeRunning = false;
-
+                commandRunning = false;
             }
-
         }
 
-        void computeVideoBruchTransform()
+        private void computeVideoBrushTransform()
         {
-
-            if (m_captureDevice == null)
+            if (captureDevice == null)
+            {
                 return;
+            }
 
-            var tmptransform = new RotateTransform() { Angle = m_orientationAngle + m_captureDevice.SensorRotationInDegrees };
-            var previewSize = tmptransform.TransformBounds(new Rect(new Point(), new Size(m_captureDevice.PreviewResolution.Width, m_captureDevice.PreviewResolution.Height)));
-
-
+            var tmptransform = new RotateTransform() { Angle = orientationAngle + captureDevice.SensorRotationInDegrees };
+            var previewSize = tmptransform.TransformBounds(new Rect(new Point(), new Size(captureDevice.PreviewResolution.Width, captureDevice.PreviewResolution.Height)));
 
             double s1 = viewfinderCanvas.ActualWidth / previewSize.Width;
             double s2 = viewfinderCanvas.ActualHeight / previewSize.Height;
-
             
-            double scale = m_Mode == StrechMode.UniformFill ? Math.Max(s1, s2) : Math.Min(s1, s2);
+            double scale = mode == StrechMode.UniformFill ? Math.Max(s1, s2) : Math.Min(s1, s2);
 
             var t = new TransformGroup();
-            if (m_sensorLocation == CameraSensorLocation.Front)
+            if (sensorLocation == CameraSensorLocation.Front)
             {
-                t.Children.Add(new CompositeTransform() { Rotation = -(m_orientationAngle + m_captureDevice.SensorRotationInDegrees), CenterX = viewfinderCanvas.ActualWidth / 2, CenterY = viewfinderCanvas.ActualHeight / 2, ScaleX = scale, ScaleY = scale });
+                t.Children.Add(new CompositeTransform() { Rotation = -(orientationAngle + captureDevice.SensorRotationInDegrees), CenterX = viewfinderCanvas.ActualWidth / 2, CenterY = viewfinderCanvas.ActualHeight / 2, ScaleX = scale, ScaleY = scale });
                 t.Children.Add(new ScaleTransform() { ScaleX = -1, CenterX = viewfinderCanvas.ActualWidth / 2, CenterY = viewfinderCanvas.ActualHeight / 2 });
             }
             else
             {
-                t.Children.Add(new CompositeTransform() { Rotation = m_orientationAngle + m_captureDevice.SensorRotationInDegrees, CenterX = viewfinderCanvas.ActualWidth / 2, CenterY = viewfinderCanvas.ActualHeight / 2, ScaleX = scale, ScaleY = scale });
+                t.Children.Add(new CompositeTransform() { Rotation = orientationAngle + captureDevice.SensorRotationInDegrees, CenterX = viewfinderCanvas.ActualWidth / 2, CenterY = viewfinderCanvas.ActualHeight / 2, ScaleX = scale, ScaleY = scale });
             }
           
             viewfinderBrush.Transform = t;
-            
-
-
         }
         public async Task<CameraFocusStatus> FocusAsync()
         {
-            if (commandeRunning)
+            if (commandRunning)
+            {
                 return CameraFocusStatus.NotLocked;
+            }
+                
             try
             {
-                commandeRunning = true;
-                if (m_captureDevice != null && m_sensorLocation == CameraSensorLocation.Back)
-                    return await m_captureDevice.FocusAsync();
+                commandRunning = true;
+                if (captureDevice != null && sensorLocation == CameraSensorLocation.Back)
+                {
+                    return await captureDevice.FocusAsync();
+                }
             }
             finally
             {
-                commandeRunning = false;
+                commandRunning = false;
             }
+            
             return CameraFocusStatus.NotLocked;
         }
-        public async Task<IBuffer> TakePicture()
+        public async Task<Stream> TakePicture()
         {
-            if (m_captureDevice == null || commandeRunning)
+            if (captureDevice == null || commandRunning)
+            {
                 return null;
+            }
+                
             try
             {
-                commandeRunning = true;
-                int angle = (int)(m_orientationAngle + m_captureDevice.SensorRotationInDegrees);
+                commandRunning = true;
+                int angle = (int)(orientationAngle + captureDevice.SensorRotationInDegrees);
 
-                if (m_sensorLocation == CameraSensorLocation.Front)
+                if (sensorLocation == CameraSensorLocation.Front)
+                {
                     angle = -angle;
-            
+                }
 
-                m_captureDevice.SetProperty(KnownCameraGeneralProperties.EncodeWithOrientation, angle);
-                m_captureDevice.SetProperty(KnownCameraGeneralProperties.SpecifiedCaptureOrientation, 0);
+                captureDevice.SetProperty(KnownCameraGeneralProperties.EncodeWithOrientation, angle);
+                captureDevice.SetProperty(KnownCameraGeneralProperties.SpecifiedCaptureOrientation, 0);
 
-
-                var cameraCaptureSequence = m_captureDevice.CreateCaptureSequence(1);
+                var cameraCaptureSequence = captureDevice.CreateCaptureSequence(1);
                 var stream = new MemoryStream();
                 cameraCaptureSequence.Frames[0].CaptureStream = stream.AsOutputStream();
-                await m_captureDevice.PrepareCaptureSequenceAsync(cameraCaptureSequence);
+                await captureDevice.PrepareCaptureSequenceAsync(cameraCaptureSequence);
                 await cameraCaptureSequence.StartCaptureAsync();
-                if (m_sensorLocation == CameraSensorLocation.Back)
+
+                if (sensorLocation == CameraSensorLocation.Back)
                 {
-                    return stream.GetWindowsRuntimeBuffer();
+                    return stream;
                 }
                 else
                 {
-                    return null;
-                    //return await JpegTools.FlipAndRotateAsync(stream.GetWindowsRuntimeBuffer(), FlipMode.Horizontal, Rotation.Rotate0, JpegOperation.AllowLossy);
+                    var bitmap = new WriteableBitmap(1, 1).FromStream(stream);
+                    var flippedBitmap = bitmap.Flip(WriteableBitmapExtensions.FlipMode.Horizontal);
+                    var fileStream = new MemoryStream();
+                    flippedBitmap.SaveJpeg(fileStream, flippedBitmap.PixelWidth, flippedBitmap.PixelHeight, 100, 100);
+                    return fileStream;
                 }
-
             }
             finally
             {
-                commandeRunning = false;
+                commandRunning = false;
             }
-            //return null;
         }
     }
 }

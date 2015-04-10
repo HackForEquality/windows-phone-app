@@ -7,6 +7,8 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Microsoft.Devices;
+using Windows.Phone.Media.Capture;
 
 namespace YesEquality.Views
 {
@@ -15,6 +17,9 @@ namespace YesEquality.Views
         public MainView()
         {
             InitializeComponent();
+
+            ViewFinder.SensorLocation = CameraSensorLocation.Front;
+            ViewFinder.Start();
         }
     }
 }

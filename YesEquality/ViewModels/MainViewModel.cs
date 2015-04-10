@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using Microsoft.Devices;
 using System;
 
 namespace YesEquality.ViewModels
