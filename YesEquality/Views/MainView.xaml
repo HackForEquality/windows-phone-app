@@ -5,6 +5,7 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:bab="clr-namespace:Caliburn.Micro.BindableAppBar;assembly=Caliburn.Micro.BindableAppBar"
+    xmlns:custom="clr-namespace:YesEquality.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -23,7 +24,7 @@
 
         <!-- Viewfinder -->
         <Grid Grid.Row="1" Background="#dedede">
-            
+            <custom:ViewFinder Name="ViewFinder" Height="480" Width="480" />
         </Grid>
 
         <!-- Camera button -->

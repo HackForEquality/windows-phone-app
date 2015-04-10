@@ -114,5 +114,10 @@ namespace YesEquality
             ConventionManager.AddElementConvention<BindableAppBarButton>(Control.IsEnabledProperty, "DataContext", "Click");
             ConventionManager.AddElementConvention<BindableAppBarMenuItem>(Control.IsEnabledProperty, "DataContext", "Click");
         }
+
+        public PhoneApplicationFrame GetRootFrame()
+        {
+            return rootFrame;
+        }
     }
 }

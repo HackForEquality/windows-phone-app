@@ -97,6 +97,9 @@
     <Compile Include="Models\BadgeModel.cs" />
     <Compile Include="Models\InfoModel.cs" />
     <Compile Include="Models\Messages\CommandMessage.cs" />
+    <Compile Include="Resources\Controls\ViewFinder.xaml.cs">
+      <DependentUpon>ViewFinder.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Converters\BooleanToAppBarModeConverter.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\BadgeListViewModel.cs" />
@@ -126,6 +129,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Resources\Controls\ViewFinder.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\AboutView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
