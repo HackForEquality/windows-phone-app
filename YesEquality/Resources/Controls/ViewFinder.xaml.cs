@@ -220,7 +220,7 @@ namespace YesEquality.Controls
                 }
                 
                 var SupportedResolutions = PhotoCaptureDevice.GetAvailableCaptureResolutions(sensorLocation).ToArray();
-                captureDevice = await PhotoCaptureDevice.OpenAsync(sensorLocation, SupportedResolutions[0]);
+                captureDevice = await PhotoCaptureDevice.OpenAsync(sensorLocation, SupportedResolutions.Last());
                 viewfinderBrush.SetSource(captureDevice);
                 computeVideoBrushTransform();
             }
@@ -294,7 +294,7 @@ namespace YesEquality.Controls
 
                 if (sensorLocation == CameraSensorLocation.Front)
                 {
-                    angle = -angle;
+                    //angle = -angle;
                 }
 
                 captureDevice.SetProperty(KnownCameraGeneralProperties.EncodeWithOrientation, angle);
