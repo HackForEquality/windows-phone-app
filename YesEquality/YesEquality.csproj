@@ -96,7 +96,6 @@
     </Compile>
     <Compile Include="Models\BadgeModel.cs" />
     <Compile Include="Models\InfoModel.cs" />
-    <Compile Include="Models\Messages\CommandMessage.cs" />
     <Compile Include="Resources\Controls\ViewFinder.xaml.cs">
       <DependentUpon>ViewFinder.xaml</DependentUpon>
     </Compile>

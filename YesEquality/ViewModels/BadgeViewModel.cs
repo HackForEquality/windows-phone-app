@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using YesEquality.Models;
 
 namespace YesEquality.ViewModels
@@ -11,6 +12,7 @@ namespace YesEquality.ViewModels
         private readonly INavigationService navigationService;
         private readonly BadgeListViewModel whiteBadges;
         private readonly BadgeListViewModel colourBadges;
+        public BadgeModel SelectedBadge;
 
         public BadgeViewModel(INavigationService navigationService, BadgeListViewModel whiteBadges, BadgeListViewModel colourBadges)
         {
@@ -53,6 +55,7 @@ namespace YesEquality.ViewModels
         #region Commands
         public void Save()
         {
+            Debug.WriteLine("Badge: " + SelectedBadge.ImagePath);
             navigationService.GoBack();
         }
         

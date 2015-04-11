@@ -4,26 +4,32 @@ using PropertyChanged;
 using System;
 using System.Diagnostics;
 using System.IO.IsolatedStorage;
-using YesEquality.Models.Messages;
+using Windows.Phone.Media.Capture;
+using YesEquality.Views;
 
 namespace YesEquality.ViewModels
 {
     [ImplementPropertyChanged]
     public class MainViewModel : Screen
     {
-        private readonly IEventAggregator eventAggregator;
         private readonly INavigationService navigationService;
-
+        private MainView mainView;
         public Uri ImagePath { get; set; }
 
-        public MainViewModel(INavigationService navigationService, IEventAggregator eventAggregator)
+        public MainViewModel(INavigationService navigationService)
         {
             this.navigationService = navigationService;
-            this.eventAggregator = eventAggregator;
         }
 
         protected override void OnViewReady(object view)
         {
+            mainView = view as MainView;
+            
+            // Start camera
+            mainView.ViewFinder.SensorLocation = CameraSensorLocation.Front;
+            mainView.ViewFinder.Start();
+
+            // Use save logo selection
             IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
             if (settings.Contains("logo"))
             {
@@ -52,9 +58,14 @@ namespace YesEquality.ViewModels
             navigationService.UriFor<BadgeViewModel>().Navigate();
         }
 
+        public bool CanSwitchCamera()
+        {
+            return PhotoCamera.IsCameraTypeSupported(CameraType.FrontFacing) && PhotoCamera.IsCameraTypeSupported(CameraType.Primary);
+        }
+
         public void SwitchCamera()
         {
-            eventAggregator.PublishOnUIThread(new CommandMessage(Commands.SwitchCamera));
+            mainView.ViewFinder.SensorLocation = mainView.ViewFinder.SensorLocation == CameraSensorLocation.Front ? CameraSensorLocation.Back : CameraSensorLocation.Front;
         }
         #endregion
 
