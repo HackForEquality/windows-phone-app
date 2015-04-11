@@ -33,12 +33,13 @@ namespace YesEquality.ViewModels
             IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
             if (settings.Contains("logo"))
             {
-                ImagePath = new Uri(settings["logo"] as string, UriKind.Relative);
+                ImagePath = settings["logo"] as Uri;
             }
             else
             {
                 // Default
                 ImagePath = new Uri("/Resources/Assets/Badges/White/YES_ImVoting.png", UriKind.Relative);
+                settings["logo"] = ImagePath;
             }
         }
 

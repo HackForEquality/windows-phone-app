@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO.IsolatedStorage;
 using YesEquality.Models;
 
 namespace YesEquality.ViewModels
@@ -56,6 +57,7 @@ namespace YesEquality.ViewModels
         public void Save()
         {
             Debug.WriteLine("Badge: " + SelectedBadge.ImagePath);
+            IsolatedStorageSettings.ApplicationSettings["logo"] = SelectedBadge.ImagePath;
             navigationService.GoBack();
         }
         
