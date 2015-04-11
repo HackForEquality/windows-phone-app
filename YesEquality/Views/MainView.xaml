@@ -25,6 +25,10 @@
         <!-- Viewfinder -->
         <Grid Grid.Row="1" Background="#dedede">
             <custom:ViewFinder Name="ViewFinder" Height="480" Width="480" />
+            <Grid x:Name="PreviewGrid">
+                <Image Name="Logo" Source="{Binding ImagePath}" Height="200" Width="200" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="12" />
+                <Image Name="Preview" />
+            </Grid>
         </Grid>
 
         <!-- Camera button -->

@@ -23,5 +23,6 @@ namespace YesEquality.Models.Messages
     public enum Commands
     {
         ClearCheckedItems,
+        SwitchCamera
     }
 }
