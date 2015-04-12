@@ -2,7 +2,7 @@
 using System;
 using System.Windows.Data;
 
-namespace YesEquality.Resources.Converters
+namespace YesEquality.Converters
 {
     public class BooleanToAppBarModeConverter : IValueConverter
     {
@@ -13,7 +13,7 @@ namespace YesEquality.Resources.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            return null;
+            throw new NotImplementedException();
         }
     }
 }

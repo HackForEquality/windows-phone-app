@@ -34,7 +34,7 @@
 
         <!-- Camera button -->
         <Grid Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Button x:Name="ShutterButton" Height="70" Width="70" Margin="0">
+            <Button x:Name="TakePicture" Height="70" Width="70" Margin="0">
                 <Button.Template>
                     <ControlTemplate>
                         <Image Source="/Resources/Assets/Buttons/Camera.png"/>
@@ -44,7 +44,12 @@
         </Grid>
         
         <!-- AppBar -->
-        <bab:BindableAppBar x:Name="Normal" BackgroundColor="White" ForegroundColor="Black">
+        <bab:BindableAppBar BackgroundColor="White" ForegroundColor="Black" IsVisible="{Binding PrimaryAppBarVisible, Converter={StaticResource NotBooleanConverter}}">
+            <bab:BindableAppBarButton x:Name="Cancel" Text="Cancel" IconUri="/Resources/Assets/Buttons/Cancel.png"/>
+            <bab:BindableAppBarButton x:Name="Share" Text="Share" IconUri="/Resources/Assets/Buttons/Share.png"/>
+        </bab:BindableAppBar>
+
+        <bab:BindableAppBar BackgroundColor="White" ForegroundColor="Black" IsVisible="{Binding PrimaryAppBarVisible}">
             <bab:BindableAppBarButton x:Name="SwitchCamera" Text="Switch" IconUri="/Resources/Assets/Buttons/SwitchCamera.png"/>
             <bab:BindableAppBarButton x:Name="GoToBadges" Text="Badges" IconUri="/Resources/Assets/Buttons/Badges.png"/>
             <bab:BindableAppBarButton x:Name="GoToInfo" Text="Yes Equality" IconUri="/Resources/Assets/Buttons/Info.png"/>

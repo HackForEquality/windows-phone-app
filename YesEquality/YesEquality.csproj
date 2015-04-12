@@ -100,6 +100,7 @@
       <DependentUpon>ViewFinder.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\Converters\BooleanToAppBarModeConverter.cs" />
+    <Compile Include="Resources\Converters\NotBooleanConverter.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\BadgeListViewModel.cs" />
     <Compile Include="ViewModels\BadgeViewModel.cs" />
@@ -181,6 +182,7 @@
     <Content Include="Resources\Assets\Buttons\Link.png" />
     <Content Include="Resources\Assets\Buttons\Badges.png" />
     <Content Include="Resources\Assets\Buttons\Info.png" />
+    <Content Include="Resources\Assets\Buttons\Share.png" />
     <Content Include="Resources\Assets\Buttons\SwitchCamera.png" />
     <Content Include="Resources\Assets\Buttons\Camera.png" />
     <Content Include="Resources\Assets\Info\10_AtWork.png" />

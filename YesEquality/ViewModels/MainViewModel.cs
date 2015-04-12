@@ -1,26 +1,34 @@
 ﻿using Caliburn.Micro;
 using Microsoft.Devices;
+using Microsoft.Phone.Tasks;
 using PropertyChanged;
 using System;
 using System.Diagnostics;
 using System.IO.IsolatedStorage;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using Microsoft.Xna.Framework.Media.PhoneExtensions;
 using Windows.Phone.Media.Capture;
 using YesEquality.Views;
 
 namespace YesEquality.ViewModels
 {
     [ImplementPropertyChanged]
-    public class MainViewModel : Screen
+    public class MainViewModel : Screen, IHandle<ShareMediaTask>
     {
         private readonly INavigationService navigationService;
+        private readonly IEventAggregator eventAggregator;
         private MainView mainView;
+        private string imagePath;
+        
+        public bool PrimaryAppBarVisible {get; set;}
         public Uri ImagePath { get; set; }
 
-        public MainViewModel(INavigationService navigationService)
+        public MainViewModel(INavigationService navigationService, IEventAggregator eventAggregator)
         {
             this.navigationService = navigationService;
+            this.eventAggregator = eventAggregator;
+            PrimaryAppBarVisible = true;
         }
 
         protected override void OnViewReady(object view)
@@ -46,7 +54,15 @@ namespace YesEquality.ViewModels
         }
 
         #region Commands
-        public async void ShutterButton()
+        public bool CanTakePicture
+        {
+            get
+            {
+                return PrimaryAppBarVisible;
+            }
+        }
+        
+        public async void TakePicture()
         {
             // Set immediate viewfinder preview
             WriteableBitmap preview = new WriteableBitmap(mainView.ViewFinder, null);
@@ -62,17 +78,36 @@ namespace YesEquality.ViewModels
             // Add logo to image
             Rect cRect = new Rect(0, 0, pic.PixelWidth, pic.PixelHeight);
             WriteableBitmap logoBitmap = new WriteableBitmap(mainView.PreviewGrid, null);
-            croppedPic.Blit(cRect, logoBitmap, cRect, WriteableBitmapExtensions.BlendMode.None);
+            croppedPic.Blit(cRect, logoBitmap, cRect, WriteableBitmapExtensions.BlendMode.Alpha);
 
             // Update preview
             mainView.Preview.Source = croppedPic;
 
+            PrimaryAppBarVisible = false;
+
             // Save
-            croppedPic.SaveToMediaLibrary("Picture.jpg");
+            var picture = croppedPic.SaveToMediaLibrary("Picture.jpg");
+            imagePath = picture.GetPath();
 
             // Cleanup
             pic = null;
             croppedPic = null;
+        }
+
+        public bool CanCacel
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        public void Cancel()
+        {
+            mainView.ViewFinderPreview.Source = null;
+            mainView.Preview.Source = null;
+
+            PrimaryAppBarVisible = true;
         }
         
         public void GoToAbout()
@@ -90,14 +125,34 @@ namespace YesEquality.ViewModels
             navigationService.UriFor<BadgeViewModel>().Navigate();
         }
 
-        public bool CanSwitchCamera()
+        public bool CanSwitchCamera
         {
-            return PhotoCamera.IsCameraTypeSupported(CameraType.FrontFacing) && PhotoCamera.IsCameraTypeSupported(CameraType.Primary);
+            get
+            {
+                return PhotoCamera.IsCameraTypeSupported(CameraType.FrontFacing) && PhotoCamera.IsCameraTypeSupported(CameraType.Primary);
+            }
         }
 
         public void SwitchCamera()
         {
             mainView.ViewFinder.SensorLocation = mainView.ViewFinder.SensorLocation == CameraSensorLocation.Front ? CameraSensorLocation.Back : CameraSensorLocation.Front;
+        }
+
+        public bool CanShare
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        public void Share()
+        {
+            eventAggregator.RequestTask<ShareMediaTask>(x => x.FilePath = imagePath);
+        }
+
+        public void Handle(ShareMediaTask message)
+        {
         }
         #endregion
 
