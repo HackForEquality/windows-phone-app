@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.Devices;
+using Microsoft.Phone.Controls;
+using System;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
-using System.Net;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Navigation;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
-using System.IO;                     
-using Microsoft.Devices;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using Windows.Phone.Media.Capture;
-using System.Threading.Tasks;
-using Windows.Storage.Streams;
-using System.ComponentModel;
 
 namespace YesEquality.Controls
 {

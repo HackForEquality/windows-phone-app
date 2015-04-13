@@ -1,13 +1,12 @@
 ﻿using Caliburn.Micro;
 using Microsoft.Devices;
 using Microsoft.Phone.Tasks;
+using Microsoft.Xna.Framework.Media.PhoneExtensions;
 using PropertyChanged;
 using System;
-using System.Diagnostics;
 using System.IO.IsolatedStorage;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using Microsoft.Xna.Framework.Media.PhoneExtensions;
 using Windows.Phone.Media.Capture;
 using YesEquality.Views;
 

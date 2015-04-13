@@ -1,8 +1,6 @@
 ﻿using Caliburn.Micro;
 using PropertyChanged;
-using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using YesEquality.Models;
 using YesEquality.Views;
 

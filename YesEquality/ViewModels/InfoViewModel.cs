@@ -3,7 +3,6 @@ using Microsoft.Phone.Tasks;
 using PropertyChanged;
 using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Windows.Controls;
 using YesEquality.Models;
 

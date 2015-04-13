@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using Caliburn.Micro;
-using System.Windows;
-using System.Diagnostics;
-using Microsoft.Phone.Shell;
-using Microsoft.Phone.Controls;
-using YesEquality.ViewModels;
-using System.Windows.Navigation;
+﻿using Caliburn.Micro;
 using Caliburn.Micro.BindableAppBar;
+using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Navigation;
+using YesEquality.ViewModels;
 
 namespace YesEquality
 {

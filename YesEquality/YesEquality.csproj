@@ -237,32 +237,11 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="Telerik.Windows.BackgroundAgentTools, Version=2015.1.224.3040, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>..\packages\UI.for.WindowsPhone.8.2015.1.0224\lib\windowsphone8\Telerik.Windows.BackgroundAgentTools.dll</HintPath>
-    </Reference>
-    <Reference Include="Telerik.Windows.Behaviors, Version=2015.1.224.3040, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>..\packages\UI.for.WindowsPhone.8.2015.1.0224\lib\windowsphone8\Telerik.Windows.Behaviors.dll</HintPath>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.Chart, Version=2015.1.224.3040, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>..\packages\UI.for.WindowsPhone.8.2015.1.0224\lib\windowsphone8\Telerik.Windows.Controls.Chart.dll</HintPath>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.Data, Version=2015.1.224.3040, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>..\packages\UI.for.WindowsPhone.8.2015.1.0224\lib\windowsphone8\Telerik.Windows.Controls.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.DataVisualization, Version=2015.1.224.3040, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>..\packages\UI.for.WindowsPhone.8.2015.1.0224\lib\windowsphone8\Telerik.Windows.Controls.DataVisualization.dll</HintPath>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.Input, Version=2015.1.224.3040, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>..\packages\UI.for.WindowsPhone.8.2015.1.0224\lib\windowsphone8\Telerik.Windows.Controls.Input.dll</HintPath>
-    </Reference>
     <Reference Include="Telerik.Windows.Controls.Primitives, Version=2015.1.224.3040, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
       <HintPath>..\packages\UI.for.WindowsPhone.8.2015.1.0224\lib\windowsphone8\Telerik.Windows.Controls.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.Windows.Core, Version=2015.1.224.3040, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
       <HintPath>..\packages\UI.for.WindowsPhone.8.2015.1.0224\lib\windowsphone8\Telerik.Windows.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Telerik.Windows.Data, Version=2015.1.224.3040, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>..\packages\UI.for.WindowsPhone.8.2015.1.0224\lib\windowsphone8\Telerik.Windows.Data.dll</HintPath>
     </Reference>
     <Reference Include="WriteableBitmapExWinPhone">
       <HintPath>..\packages\WriteableBitmapEx.1.5.0.0\lib\WindowsPhone8\WriteableBitmapExWinPhone.dll</HintPath>

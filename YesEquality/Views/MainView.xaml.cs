@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Phone.Controls;
+﻿using Microsoft.Phone.Controls;
 
 namespace YesEquality.Views
 {
