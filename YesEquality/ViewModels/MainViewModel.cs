@@ -1,10 +1,12 @@
 ﻿using Caliburn.Micro;
 using Microsoft.Devices;
+using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 using Microsoft.Xna.Framework.Media.PhoneExtensions;
 using PropertyChanged;
 using System;
 using System.IO.IsolatedStorage;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using Windows.Phone.Media.Capture;
@@ -21,13 +23,15 @@ namespace YesEquality.ViewModels
         private string imagePath;
         
         public bool PrimaryAppBarVisible {get; set;}
+        public bool SecondaryAppBarVisible { get; set; }
         public Uri ImagePath { get; set; }
 
         public MainViewModel(INavigationService navigationService, IEventAggregator eventAggregator)
         {
             this.navigationService = navigationService;
             this.eventAggregator = eventAggregator;
-            PrimaryAppBarVisible = true;
+            PrimaryAppBarVisible = false;
+            SecondaryAppBarVisible = false;
         }
 
         protected override void OnViewReady(object view)
@@ -50,6 +54,13 @@ namespace YesEquality.ViewModels
                 ImagePath = new Uri("/Resources/Assets/Badges/White/YES_ImVoting.png", UriKind.Relative);
                 settings["logo"] = ImagePath;
             }
+        }
+
+        protected override async void OnViewLoaded(object view)
+        {
+            await Task.Delay(500);
+            //SystemTray.IsVisible = true;
+            PrimaryAppBarVisible = true;
         }
 
         #region Commands
@@ -83,6 +94,7 @@ namespace YesEquality.ViewModels
             mainView.Preview.Source = croppedPic;
 
             PrimaryAppBarVisible = false;
+            SecondaryAppBarVisible = !PrimaryAppBarVisible;
 
             // Save
             var picture = croppedPic.SaveToMediaLibrary("Picture.jpg");
@@ -107,6 +119,7 @@ namespace YesEquality.ViewModels
             mainView.Preview.Source = null;
 
             PrimaryAppBarVisible = true;
+            SecondaryAppBarVisible = !PrimaryAppBarVisible;
         }
         
         public void GoToAbout()

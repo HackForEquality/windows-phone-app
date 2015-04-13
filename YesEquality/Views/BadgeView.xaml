@@ -5,18 +5,16 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:bab="clr-namespace:Caliburn.Micro.BindableAppBar;assembly=Caliburn.Micro.BindableAppBar"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:custom="clr-namespace:YesEquality.Controls"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="False">
 
     <Grid>
         <!-- Badges Pivot -->
-        <phone:Pivot x:Name="Items" Title="" Margin="0">
+        <phone:Pivot x:Name="Items" Title="" Margin="0,12,0,0">
             <phone:Pivot.TitleTemplate>
                 <DataTemplate>
                     <TextBlock Text="CHOOSE A BADGE..." Margin="0,-1,0,-3" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Foreground="{StaticResource PhoneForegroundBrush}" FontSize="{StaticResource PhoneFontSizeMedium}"/>
@@ -31,10 +29,10 @@
         </phone:Pivot>
 
         <!-- AppBar -->
-        <bab:BindableAppBar x:Name="Normal" BackgroundColor="White" ForegroundColor="Black">
+        <custom:ThemeableBindableAppBar x:Name="Normal" BackgroundColor="{StaticResource PhoneBorderColor}" ForegroundColor="Black">
             <bab:BindableAppBarButton x:Name="Save" Text="Save" IconUri="/Resources/Assets/Buttons/Ok.png"/>
             <bab:BindableAppBarButton x:Name="Cancel" Text="Cancel" IconUri="/Resources/Assets/Buttons/Cancel.png"/>
-        </bab:BindableAppBar>
+        </custom:ThemeableBindableAppBar>
     </Grid>
 
 </phone:PhoneApplicationPage>

@@ -6,20 +6,18 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:bab="clr-namespace:Caliburn.Micro.BindableAppBar;assembly=Caliburn.Micro.BindableAppBar"
     xmlns:custom="clr-namespace:YesEquality.Controls"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True" shell:SystemTray.Opacity="0.8">
 
-    <Grid>
+    <Grid Background="{StaticResource PhoneBackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="480" />
             <RowDefinition Height="120" />
+            <RowDefinition Height="72" />
         </Grid.RowDefinitions>
 
         <!-- Viewfinder -->
@@ -44,17 +42,17 @@
         </Grid>
         
         <!-- AppBar -->
-        <bab:BindableAppBar BackgroundColor="White" ForegroundColor="Black" IsVisible="{Binding PrimaryAppBarVisible, Converter={StaticResource NotBooleanConverter}}">
+        <custom:ThemeableBindableAppBar IsVisible="{Binding SecondaryAppBarVisible}">
             <bab:BindableAppBarButton x:Name="Cancel" Text="Cancel" IconUri="/Resources/Assets/Buttons/Cancel.png"/>
             <bab:BindableAppBarButton x:Name="Share" Text="Share" IconUri="/Resources/Assets/Buttons/Share.png"/>
-        </bab:BindableAppBar>
+        </custom:ThemeableBindableAppBar>
 
-        <bab:BindableAppBar BackgroundColor="White" ForegroundColor="Black" IsVisible="{Binding PrimaryAppBarVisible}">
+        <custom:ThemeableBindableAppBar IsVisible="{Binding PrimaryAppBarVisible}">
             <bab:BindableAppBarButton x:Name="SwitchCamera" Text="Switch" IconUri="/Resources/Assets/Buttons/SwitchCamera.png"/>
             <bab:BindableAppBarButton x:Name="GoToBadges" Text="Badges" IconUri="/Resources/Assets/Buttons/Badges.png"/>
             <bab:BindableAppBarButton x:Name="GoToInfo" Text="Yes Equality" IconUri="/Resources/Assets/Buttons/Info.png"/>
             <bab:BindableAppBarMenuItem x:Name="GoToAbout" Text="About the app" />
-        </bab:BindableAppBar>
+        </custom:ThemeableBindableAppBar>
     </Grid>
 
 </phone:PhoneApplicationPage>
