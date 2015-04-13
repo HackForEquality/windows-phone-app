@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO.IsolatedStorage;
 using YesEquality.Models;
+using YesEquality.Views;
 
 namespace YesEquality.ViewModels
 {
@@ -30,14 +31,20 @@ namespace YesEquality.ViewModels
         {
             base.OnInitialize();
             
+            // Setup pivot
             Items.Add(whiteBadges);
             Items.Add(colourBadges);
-            
             ActivateItem(whiteBadges);
 
+            // Set selected badge
+            var imagePath = IsolatedStorageSettings.ApplicationSettings["logo"] as Uri;
+            SelectedBadge = new BadgeModel() { ImagePath =  imagePath };
+
+            // Set white badges
             var badges = createBadges("/Resources/Assets/Badges/White/");
             whiteBadges.Badges = new ObservableCollection<BadgeModel>(badges);
 
+            // Set colour badges
             badges = createBadges("/Resources/Assets/Badges/Colour/");
             colourBadges.Badges = new ObservableCollection<BadgeModel>(badges);
         }
@@ -56,8 +63,8 @@ namespace YesEquality.ViewModels
         #region Commands
         public void Save()
         {
-            Debug.WriteLine("Badge: " + SelectedBadge.ImagePath);
             IsolatedStorageSettings.ApplicationSettings["logo"] = SelectedBadge.ImagePath;
+            IsolatedStorageSettings.ApplicationSettings.Save();
             navigationService.GoBack();
         }
         
