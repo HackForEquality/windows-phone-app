@@ -3,7 +3,9 @@ using Microsoft.Phone.Tasks;
 using PropertyChanged;
 using System;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
+using Telerik.Windows.Controls;
 using YesEquality.Models;
 
 namespace YesEquality.ViewModels
@@ -21,7 +23,10 @@ namespace YesEquality.ViewModels
             this.navigationService = navigationService;
             this.eventAggregator = eventAggregator;
             eventAggregator.Subscribe(this);
+        }
 
+        protected override void OnViewLoaded(object view)
+        {
             InfoList = new ObservableCollection<InfoModel>();
             InfoList.Add(new InfoModel() { Title = "To vote on May 22nd you must be:", ImagePath = new Uri("/Resources/Assets/Info/1_Over18.png", UriKind.Relative), ImageText = "Over 18", BackgroundColour = "#7f4097" });
             InfoList.Add(new InfoModel() { Title = "To vote on May 22nd you must be:", ImagePath = new Uri("/Resources/Assets/Info/2_IrishCitizen.png", UriKind.Relative), ImageText = "Irish Citizen", BackgroundColour = "#1b75bb" });
@@ -39,7 +44,7 @@ namespace YesEquality.ViewModels
         }
 
         #region Commands
-        public void SelectionChanged(SelectionChangedEventArgs e)
+        public void SlideSelectionChanged(SelectionChangedEventArgs e)
         {
             var item = e.AddedItems[0] as InfoModel;
 
@@ -52,6 +57,12 @@ namespace YesEquality.ViewModels
             {
                 ExpandAppBar = false;
             }
+        }
+        public void PaginationLoaded(RadPaginationControl pagination)
+        {
+            // Show pagination control after loading
+            // Fix for 'No Data to display' message
+            pagination.Visibility = Visibility.Visible;
         }
 
         public void GoToWebsite()

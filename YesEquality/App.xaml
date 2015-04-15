@@ -12,7 +12,7 @@
         <local:AppBootstrapper x:Key="bootstrapper" />
         
         <!-- Converters -->
-        <!--<cal:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>-->
+        <cal:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <converter:NotBooleanConverter x:Key="NotBooleanConverter"/>
         <converter:BooleanToAppBarModeConverter x:Key="BooleanToAppBarModeConverter"/>
     </Application.Resources>

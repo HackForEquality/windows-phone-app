@@ -21,7 +21,7 @@
         </Grid.RowDefinitions>
         
         <!-- Slide View -->
-        <telerikPrimitives:RadSlideView Grid.RowSpan="2" cal:Message.Attach="[Event SelectionChanged] = [Action SelectionChanged($eventArgs)]" x:Name="SlideView" ItemsSource="{Binding InfoList}" IsFilmstripModeEnabled="True" IsLoopingEnabled="True">
+        <telerikPrimitives:RadSlideView Grid.RowSpan="2" cal:Message.Attach="[Event SelectionChanged] = [Action SlideSelectionChanged($eventArgs)]" x:Name="SlideView" ItemsSource="{Binding InfoList}" CacheMode="BitmapCache" IsLoopingEnabled="True">
             <telerikPrimitives:RadSlideView.ItemTemplate>
                 <DataTemplate>
                     <Grid Background="{Binding BackgroundColour}">
@@ -41,9 +41,9 @@
                 </DataTemplate>
             </telerikPrimitives:RadSlideView.ItemTemplate>
         </telerikPrimitives:RadSlideView>
-
+        
         <!-- Pagination Control -->
-        <telerikPrimitives:RadPaginationControl Grid.Row="1" PageProvider="{Binding ElementName=SlideView}" VerticalAlignment="Top" DisplayMode="Thumbnails" HorizontalAlignment="Center">
+        <telerikPrimitives:RadPaginationControl IsHitTestVisible="False" Visibility="Collapsed" cal:Message.Attach="[Event Loaded] = [Action PaginationLoaded($source)]" Grid.Row="1" PageProvider="{Binding ElementName=SlideView}" VerticalAlignment="Top" DisplayMode="Thumbnails" HorizontalAlignment="Center">
             <telerikPrimitives:RadPaginationControl.ItemTemplate>
                 <DataTemplate>
                     <Ellipse Width="8" Height="8" Stroke="{StaticResource PhoneBackgroundBrush}" StrokeThickness="2" Margin="12"/>
