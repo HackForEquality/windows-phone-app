@@ -19,7 +19,8 @@
           <SmallImageURI IsRelative="true" IsResource="false">Resources\Assets\Tiles\Small_159x159.png</SmallImageURI>
           <Count>0</Count>
           <BackgroundImageURI IsRelative="true" IsResource="false">Resources\Assets\Tiles\Medium_336x336.png</BackgroundImageURI>
-          <Title>Yes Equality</Title>
+          <Title>
+          </Title>
           <BackContent>
           </BackContent>
           <BackBackgroundImageURI>
