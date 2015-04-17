@@ -105,8 +105,6 @@
     <Compile Include="ViewModels\SettingsAboutViewModel.cs" />
     <Compile Include="ViewModels\SettingsGeneralViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
-    <Compile Include="ViewModels\BadgeListViewModel.cs" />
-    <Compile Include="ViewModels\BadgeViewModel.cs" />
     <Compile Include="ViewModels\InfoViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\SettingsAboutView.xaml.cs">

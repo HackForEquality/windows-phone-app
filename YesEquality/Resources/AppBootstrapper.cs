@@ -39,8 +39,6 @@ namespace YesEquality
             // Define VMs
             container.PerRequest<MainViewModel>();
             container.PerRequest<InfoViewModel>();
-            container.PerRequest<BadgeViewModel>();
-            container.PerRequest<BadgeListViewModel>();
             container.PerRequest<SettingsViewModel>();
             container.PerRequest<SettingsGeneralViewModel>();
             container.PerRequest<SettingsAboutViewModel>();

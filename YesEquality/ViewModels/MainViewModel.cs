@@ -5,11 +5,14 @@ using Microsoft.Phone.Tasks;
 using Microsoft.Xna.Framework.Media.PhoneExtensions;
 using PropertyChanged;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO.IsolatedStorage;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using Windows.Phone.Media.Capture;
+using YesEquality.Models;
 using YesEquality.Views;
 
 namespace YesEquality.ViewModels
@@ -21,10 +24,11 @@ namespace YesEquality.ViewModels
         private readonly IEventAggregator eventAggregator;
         private MainView mainView;
         private string imagePath;
-        
+        private List<Uri> badgeList;
+
         public bool PrimaryAppBarVisible {get; set;}
         public bool SecondaryAppBarVisible { get; set; }
-        public Uri ImagePath { get; set; }
+        public Uri SelectedBadge { get; set; }
 
         public MainViewModel(INavigationService navigationService, IEventAggregator eventAggregator)
         {
@@ -36,24 +40,28 @@ namespace YesEquality.ViewModels
 
         protected override void OnViewReady(object view)
         {
-            mainView = view as MainView;
-            
             // Start camera
+            mainView = view as MainView;
             mainView.ViewFinder.SensorLocation = CameraSensorLocation.Front;
             mainView.ViewFinder.Start();
 
             // Use save logo selection
             IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
-            if (settings.Contains("logo"))
+            if (settings.Contains("badge"))
             {
-                ImagePath = settings["logo"] as Uri;
+                SelectedBadge = settings["badge"] as Uri;
             }
             else
             {
                 // Default
-                ImagePath = new Uri("/Resources/Assets/Badges/White/YES_ImVoting.png", UriKind.Relative);
-                settings["logo"] = ImagePath;
+                SelectedBadge = new Uri("/Resources/Assets/Badges/White/YES_ImVoting.png", UriKind.Relative);
+                settings["badge"] = SelectedBadge;
             }
+
+            // Create badge list
+            badgeList = new List<Uri>();
+            badgeList.AddRange(createBadges("/Resources/Assets/Badges/White/"));
+            badgeList.AddRange(createBadges("/Resources/Assets/Badges/Colour/"));
 
             // Preload view, hack to fix missing page transition when page is first viewed
             var cacheView = new InfoView();
@@ -64,6 +72,31 @@ namespace YesEquality.ViewModels
             await Task.Delay(500);
             //SystemTray.IsVisible = true;
             PrimaryAppBarVisible = true;
+        }
+
+        private List<Uri> createBadges(string path)
+        {
+            var badges = new List<Uri>();
+            badges.Add(new Uri(path + "TA.png", UriKind.Relative));
+            badges.Add(new Uri(path + "YES.png", UriKind.Relative));
+            badges.Add(new Uri(path + "YES_ImVoting.png", UriKind.Relative));
+            badges.Add(new Uri(path + "YES_Me.png", UriKind.Relative));
+            badges.Add(new Uri(path + "YES_WereVoting.png", UriKind.Relative));
+
+            return badges;
+        }
+
+        private Uri nextBadge()
+        {
+            var index = badgeList.IndexOf(SelectedBadge);
+            if (badgeList.Count == (index+1))
+            {
+                return badgeList[0];
+            }
+            else
+            {
+                return badgeList[index+1];
+            }
         }
 
         #region Commands
@@ -135,9 +168,9 @@ namespace YesEquality.ViewModels
             navigationService.UriFor<InfoViewModel>().Navigate();
         }
 
-        public void GoToBadges()
+        public void NextBadge()
         {
-            navigationService.UriFor<BadgeViewModel>().Navigate();
+            SelectedBadge = nextBadge();   
         }
 
         public bool CanSwitchCamera
