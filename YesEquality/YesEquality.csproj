@@ -102,6 +102,7 @@
     </Compile>
     <Compile Include="Resources\Converters\BooleanToAppBarModeConverter.cs" />
     <Compile Include="Resources\Converters\NotBooleanConverter.cs" />
+    <Compile Include="Resources\Extensions\StoryboardExtensions.cs" />
     <Compile Include="ViewModels\SettingsAboutViewModel.cs" />
     <Compile Include="ViewModels\SettingsGeneralViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
@@ -115,12 +116,6 @@
     </Compile>
     <Compile Include="Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\BadgeListView.xaml.cs">
-      <DependentUpon>BadgeListView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\BadgeView.xaml.cs">
-      <DependentUpon>BadgeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\InfoView.xaml.cs">
       <DependentUpon>InfoView.xaml</DependentUpon>
@@ -149,14 +144,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SettingsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\BadgeListView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\BadgeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -195,7 +182,6 @@
     <Content Include="Resources\Assets\Buttons\Cancel.png" />
     <Content Include="Resources\Assets\Buttons\Ok.png" />
     <Content Include="Resources\Assets\Buttons\Link.png" />
-    <Content Include="Resources\Assets\Buttons\Badges.png" />
     <Content Include="Resources\Assets\Buttons\Info.png" />
     <Content Include="Resources\Assets\Buttons\Share.png" />
     <Content Include="Resources\Assets\Buttons\SwitchCamera.png" />

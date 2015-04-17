@@ -34,6 +34,28 @@
             </toolkit:NavigationOutTransition.Forward>
         </toolkit:NavigationOutTransition>
     </toolkit:TransitionService.NavigationOutTransition>
+    
+    <phone:PhoneApplicationPage.Resources>
+        <Storyboard x:Name="ImageBounce">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" Storyboard.TargetName="Logo">
+                <EasingDoubleKeyFrame Value="0.6" KeyTime="0:0:0.1" />
+                <EasingDoubleKeyFrame Value="1" KeyTime="00:00:0.4">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ElasticEase Oscillations="1" EasingMode="EaseOut" />
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" Storyboard.TargetName="Logo">
+                <EasingDoubleKeyFrame Value="0.6" KeyTime="0:0:0.1" />
+                <EasingDoubleKeyFrame Value="1" KeyTime="00:00:0.4">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ElasticEase Oscillations="1" EasingMode="EaseOut" />
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </phone:PhoneApplicationPage.Resources>
 
     <Grid Background="{StaticResource PhoneBackgroundBrush}">
         <Grid.RowDefinitions>
@@ -48,8 +70,10 @@
             <custom:ViewFinder Name="ViewFinder" Height="480" Width="480" />
             <Image Name="ViewFinderPreview" />
             <Grid x:Name="PreviewGrid">
-                <Image Name="Logo"  RenderTransformOrigin="0.5,0.5" Source="{Binding SelectedBadge}" cal:Message.Attach="[Event Tap] = [Action NextBadge]" Height="200" Width="200" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="12">
-                    
+                <Image Name="Logo" RenderTransformOrigin="0.5,0.5" Source="{Binding SelectedBadge}" cal:Message.Attach="[Event Tap] = [Action NextBadge]" Height="200" Width="200" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="12">
+                    <Image.RenderTransform>
+                        <ScaleTransform ScaleX="1.0" ScaleY="1.0" />
+                    </Image.RenderTransform>
                 </Image>
                 <Image Name="Preview" />
             </Grid>
@@ -74,7 +98,6 @@
 
         <custom:ThemeableBindableAppBar IsVisible="{Binding PrimaryAppBarVisible}">
             <bab:BindableAppBarButton x:Name="SwitchCamera" Text="Switch" IconUri="/Resources/Assets/Buttons/SwitchCamera.png"/>
-            <bab:BindableAppBarButton x:Name="GoToBadges" Text="Badges" IconUri="/Resources/Assets/Buttons/Badges.png"/>
             <bab:BindableAppBarButton x:Name="GoToInfo" Text="Yes Equality" IconUri="/Resources/Assets/Buttons/Info.png"/>
             <bab:BindableAppBarMenuItem x:Name="GoToSettings" Text="Settings" />
         </custom:ThemeableBindableAppBar>

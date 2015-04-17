@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using Windows.Phone.Media.Capture;
 using YesEquality.Models;
 using YesEquality.Views;
+using YesEquality.Extensions;
 
 namespace YesEquality.ViewModels
 {
@@ -168,9 +169,11 @@ namespace YesEquality.ViewModels
             navigationService.UriFor<InfoViewModel>().Navigate();
         }
 
-        public void NextBadge()
+        public async void NextBadge()
         {
-            SelectedBadge = nextBadge();   
+            SelectedBadge = nextBadge();
+            var view = GetView() as MainView;
+            await view.ImageBounce.BeginAsync().ConfigureAwait(false);
         }
 
         public bool CanSwitchCamera
