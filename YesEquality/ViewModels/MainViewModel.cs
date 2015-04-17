@@ -54,6 +54,9 @@ namespace YesEquality.ViewModels
                 ImagePath = new Uri("/Resources/Assets/Badges/White/YES_ImVoting.png", UriKind.Relative);
                 settings["logo"] = ImagePath;
             }
+
+            // Preload view, hack to fix missing page transition when page is first viewed
+            var cacheView = new InfoView();
         }
 
         protected override async void OnViewLoaded(object view)
