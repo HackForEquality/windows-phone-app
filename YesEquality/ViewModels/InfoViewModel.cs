@@ -73,11 +73,6 @@ namespace YesEquality.ViewModels
         public void Handle(WebBrowserTask message)
         {
         }
-
-        public void GoToAbout()
-        {
-            navigationService.UriFor<AboutViewModel>().Navigate();
-        }
         #endregion
     }
 }

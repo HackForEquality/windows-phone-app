@@ -41,7 +41,9 @@ namespace YesEquality
             container.PerRequest<InfoViewModel>();
             container.PerRequest<BadgeViewModel>();
             container.PerRequest<BadgeListViewModel>();
-            container.PerRequest<AboutViewModel>();
+            container.PerRequest<SettingsViewModel>();
+            container.PerRequest<SettingsGeneralViewModel>();
+            container.PerRequest<SettingsAboutViewModel>();
             
             // Add custom binding conventions
             AddCustomConventions();

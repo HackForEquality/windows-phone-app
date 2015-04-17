@@ -102,13 +102,21 @@
     </Compile>
     <Compile Include="Resources\Converters\BooleanToAppBarModeConverter.cs" />
     <Compile Include="Resources\Converters\NotBooleanConverter.cs" />
-    <Compile Include="ViewModels\AboutViewModel.cs" />
+    <Compile Include="ViewModels\SettingsAboutViewModel.cs" />
+    <Compile Include="ViewModels\SettingsGeneralViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\BadgeListViewModel.cs" />
     <Compile Include="ViewModels\BadgeViewModel.cs" />
     <Compile Include="ViewModels\InfoViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="Views\AboutView.xaml.cs">
-      <DependentUpon>AboutView.xaml</DependentUpon>
+    <Compile Include="Views\SettingsAboutView.xaml.cs">
+      <DependentUpon>SettingsAboutView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsGeneralView.xaml.cs">
+      <DependentUpon>SettingsGeneralView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\BadgeListView.xaml.cs">
       <DependentUpon>BadgeListView.xaml</DependentUpon>
@@ -134,7 +142,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\AboutView.xaml">
+    <Page Include="Views\SettingsAboutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsGeneralView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -2,9 +2,9 @@
 
 namespace YesEquality.Views
 {
-    public partial class AboutView : PhoneApplicationPage
+    public partial class SettingsView : PhoneApplicationPage
     {
-        public AboutView()
+        public SettingsView()
         {
             InitializeComponent();
         }

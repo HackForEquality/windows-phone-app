@@ -122,9 +122,9 @@ namespace YesEquality.ViewModels
             SecondaryAppBarVisible = !PrimaryAppBarVisible;
         }
         
-        public void GoToAbout()
+        public void GoToSettings()
         {
-            navigationService.UriFor<AboutViewModel>().Navigate();
+            navigationService.UriFor<SettingsViewModel>().Navigate();
         }
 
         public void GoToInfo()
