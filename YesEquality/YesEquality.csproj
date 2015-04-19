@@ -171,11 +171,11 @@
     <Content Include="Resources\Assets\Badges\Colour\YES.png" />
     <Content Include="Resources\Assets\Badges\Colour\YES_ImVoting.png" />
     <Content Include="Resources\Assets\Badges\Colour\YES_Me.png" />
-    <Content Include="Resources\Assets\Badges\Colour\YES_WereVoting.png" />
+    <Content Include="Resources\Assets\Badges\Colour\YES_WeAreVoting.png" />
     <Content Include="Resources\Assets\Badges\White\TA.png" />
     <Content Include="Resources\Assets\Badges\White\YES_ImVoting.png" />
     <Content Include="Resources\Assets\Badges\White\YES_Me.png" />
-    <Content Include="Resources\Assets\Badges\White\YES_WereVoting.png" />
+    <Content Include="Resources\Assets\Badges\White\YES_WeAreVoting.png" />
     <Content Include="Resources\Assets\Badges\White\YES.png" />
     <Content Include="Resources\Assets\Buttons\Cancel.png" />
     <Content Include="Resources\Assets\Buttons\Ok.png" />
