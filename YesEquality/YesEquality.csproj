@@ -103,6 +103,7 @@
     <Compile Include="Resources\Converters\BooleanToAppBarModeConverter.cs" />
     <Compile Include="Resources\Converters\NotBooleanConverter.cs" />
     <Compile Include="Resources\Extensions\StoryboardExtensions.cs" />
+    <Compile Include="Resources\Helpers\ReminderHelper.cs" />
     <Compile Include="ViewModels\SettingsAboutViewModel.cs" />
     <Compile Include="ViewModels\SettingsGeneralViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />

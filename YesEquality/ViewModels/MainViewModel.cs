@@ -15,6 +15,7 @@ using Windows.Phone.Media.Capture;
 using YesEquality.Models;
 using YesEquality.Views;
 using YesEquality.Extensions;
+using YesEquality.Helpers;
 
 namespace YesEquality.ViewModels
 {
@@ -57,6 +58,7 @@ namespace YesEquality.ViewModels
                 // Default
                 SelectedBadge = new Uri("/Resources/Assets/Badges/White/YES_ImVoting.png", UriKind.Relative);
                 settings["badge"] = SelectedBadge;
+                settings.Save();
             }
 
             // Create badge list
@@ -70,8 +72,12 @@ namespace YesEquality.ViewModels
 
         protected override async void OnViewLoaded(object view)
         {
+            if (!ReminderHelper.IsSetup)
+            {
+                ReminderHelper.Setup();
+            }
+
             await Task.Delay(500);
-            //SystemTray.IsVisible = true;
             PrimaryAppBarVisible = true;
         }
 
