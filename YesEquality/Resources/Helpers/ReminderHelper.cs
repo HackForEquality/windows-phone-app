@@ -44,12 +44,13 @@ namespace YesEquality.Helpers
             get 
             {
                 bool enabled = true;
-                settings.TryGetValue("ReminderOne", out enabled);
+                settings.TryGetValue("reminderOne", out enabled);
                 return enabled;
             }
             set
             {
-                settings["ReminderOne"] = value;
+                settings["reminderOne"] = value;
+                settings.Save();
 
                 if (value == true)
                 {
@@ -67,12 +68,13 @@ namespace YesEquality.Helpers
             get
             {
                 bool enabled = true;
-                settings.TryGetValue("ReminderTwo", out enabled);
+                settings.TryGetValue("reminderTwo", out enabled);
                 return enabled;
             }
             set
             {
-                settings["ReminderTwo"] = value;
+                settings["reminderTwo"] = value;
+                settings.Save();
 
                 if (value == true)
                 {
@@ -88,7 +90,7 @@ namespace YesEquality.Helpers
         private static void addReminderOne()
         {
 #if DEBUG
-            var day = DateTime.Now.AddSeconds(40);
+            var day = DateTime.Now.AddSeconds(120);
 #else
             var day = new DateTime(2015, 05, 22, 7, 58, 00, 00, DateTimeKind.Utc);
 #endif
@@ -104,14 +106,27 @@ namespace YesEquality.Helpers
             var notifications = ScheduledActionService.GetActions<ScheduledNotification>();
             if (notifications.Any() && notifications.First().Name == reminder.Name)
             {
-
                 Debug.WriteLine("Replacing existing reminder...");
-                ScheduledActionService.Replace(reminder);
+                try
+                {
+                    ScheduledActionService.Replace(reminder);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Exception while replacing reminder: " + ex.Message);
+                }
             }
             else
             {
                 Debug.WriteLine("Setting new reminder...");
-                ScheduledActionService.Add(reminder);
+                try
+                {
+                    ScheduledActionService.Add(reminder);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Exception while adding reminder: " + ex.Message);
+                }
             }
         }
         private static void addReminderTwo()
@@ -133,26 +148,50 @@ namespace YesEquality.Helpers
             var notifications = ScheduledActionService.GetActions<ScheduledNotification>();
             if (notifications.Any() && notifications.First().Name == reminder.Name)
             {
-
                 Debug.WriteLine("Replacing existing reminder...");
-                ScheduledActionService.Replace(reminder);
+                try
+                {
+                    ScheduledActionService.Replace(reminder);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Exception while replacing reminder: " + ex.Message);
+                }
             }
             else
             {
                 Debug.WriteLine("Setting new reminder...");
-                ScheduledActionService.Add(reminder);
+                try
+                {
+                    ScheduledActionService.Add(reminder);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Exception while adding reminder: " + ex.Message);
+                }
             }
         }
 
         private static void removeReminderOne()
         {
-            Debug.WriteLine("Removing reminder...");
-            ScheduledActionService.Remove("reminderOne");
+            Debug.WriteLine("Removing reminderOne...");
+            
+            var notifications = ScheduledActionService.GetActions<ScheduledNotification>();
+            if (notifications.Any() && notifications.First().Name == "reminderOne")
+            {
+                ScheduledActionService.Remove("reminderOne");
+            }
+            
         }
         private static void removeReminderTwo()
         {
-            Debug.WriteLine("Removing reminder...");
-            ScheduledActionService.Remove("reminderTwo");
+            Debug.WriteLine("Removing reminderTwo...");
+
+            var notifications = ScheduledActionService.GetActions<ScheduledNotification>();
+            if (notifications.Any() && notifications.First().Name == "reminderTwo")
+            {
+                ScheduledActionService.Remove("reminderTwo");
+            }
         }
     }
 }

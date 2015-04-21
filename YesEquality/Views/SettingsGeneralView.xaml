@@ -3,13 +3,33 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="480" d:DesignWidth="480">
 
-    <Grid Margin="12,0,0,0">
+    <Grid Margin="0,0,12,0">
+        <ScrollViewer>
+            <StackPanel>
 
+                <!-- Reminder One -->
+                <toolkit:ToggleSwitch Header="Remind me on the day" IsChecked="{Binding ReminderOneEnabled, Mode=TwoWay}" Margin="0,24,0,0" />
+
+                <TextBlock TextWrapping="Wrap" Foreground="{StaticResource PhoneSubtleBrush}" Margin="12, -24, 0, 0">
+                            <Run Text="Don't forget to vote YES"/>
+                </TextBlock>
+
+
+                <!-- Reminder Two -->
+                <toolkit:ToggleSwitch Header="Remind me the day before" IsChecked="{Binding ReminderTwoEnabled, Mode=TwoWay}" Margin="0,48,0,0" />
+
+                <TextBlock TextWrapping="Wrap" Foreground="{StaticResource PhoneSubtleBrush}" Margin="12, -24, 0, 0">
+                            <Run Text="Tell your friends, tell everybody to vote YES tomorrow!"/>
+                </TextBlock>
+
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>
