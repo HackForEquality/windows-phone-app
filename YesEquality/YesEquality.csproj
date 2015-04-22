@@ -95,7 +95,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\BadgeModel.cs" />
-    <Compile Include="Models\InfoModel.cs" />
+    <Compile Include="Models\SlideModel.cs" />
+    <Compile Include="Resources\Controls\SlideItemTemplateSelector.cs" />
     <Compile Include="Resources\Controls\ThemeableBindableAppBar.cs" />
     <Compile Include="Resources\Controls\ViewFinder.xaml.cs">
       <DependentUpon>ViewFinder.xaml</DependentUpon>
