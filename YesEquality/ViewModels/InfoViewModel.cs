@@ -32,10 +32,11 @@ namespace YesEquality.ViewModels
             InfoList.Add(new InfoModel() { Title = "Check to see if you are registered", ImagePath = new Uri("/Resources/Assets/Info/5_Check.png", UriKind.Relative), ImageText = "checktheregister.ie", BackgroundColour = "#292561" });
             InfoList.Add(new InfoModel() { Title = "Registering is easy", ImagePath = new Uri("/Resources/Assets/Info/6_Download.png", UriKind.Relative), ImageText = "Download the form", BackgroundColour = "#009348" });
             InfoList.Add(new InfoModel() { Title = "Registering is easy", ImagePath = new Uri("/Resources/Assets/Info/7_Fillin.png", UriKind.Relative), ImageText = "Get it signed & stamped by a Garda", BackgroundColour = "#91288c" });
-            InfoList.Add(new InfoModel() { Title = "Registering is easy", ImagePath = new Uri("/Resources/Assets/Info/8_PostForms.png", UriKind.Relative), ImageText = "Return it to your local authority post office", BackgroundColour = "#be202e" });
-            InfoList.Add(new InfoModel() { Title = "Student?", ImagePath = new Uri("/Resources/Assets/Info/9_Student.png", UriKind.Relative), ImageText = "You can vote by post", BackgroundColour = "#7bc043" });
-            InfoList.Add(new InfoModel() { Title = "Away at work?", ImagePath = new Uri("/Resources/Assets/Info/10_AtWork.png", UriKind.Relative), ImageText = "You can vote by post too!", BackgroundColour = "#7f4097" });
-            InfoList.Add(new InfoModel() { Title = "Changed address?", ImagePath = new Uri("/Resources/Assets/Info/11_Address.png", UriKind.Relative), ImageText = "You can vote by post", BackgroundColour = "#1b75bb" });
+            InfoList.Add(new InfoModel() { Title = "Registering is easy", ImagePath = new Uri("/Resources/Assets/Info/8_PostForms.png", UriKind.Relative), ImageText = "Return it to your local authority office by May 5th", BackgroundColour = "#be202e" });
+            InfoList.Add(new InfoModel() { Title = "On May 22nd", ImagePath = new Uri("/Resources/Assets/Info/9_Student.png", UriKind.Relative), ImageText = "Polling stations will be open from 7am to 10pm.", BackgroundColour = "#7bc043" });
+            //InfoList.Add(new InfoModel() { Title = "Away at work?", ImagePath = new Uri("/Resources/Assets/Info/10_AtWork.png", UriKind.Relative), ImageText = "You can vote by post too!", BackgroundColour = "#7f4097" });
+            //InfoList.Add(new InfoModel() { Title = "Changed address?", ImagePath = new Uri("/Resources/Assets/Info/11_Address.png", UriKind.Relative), ImageText = "You can vote by post", BackgroundColour = "#1b75bb" });
+            InfoList.Add(new InfoModel() { Title = "And remember...", ImagePath = new Uri("/Resources/Assets/Badges/White/YES.png", UriKind.Relative), ImageText = "Your vote counts. Don't forget to use it.", BackgroundColour = "#666666" });
 
             ExpandAppBar = false;
         }
