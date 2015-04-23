@@ -16,6 +16,7 @@ using YesEquality.Models;
 using YesEquality.Views;
 using YesEquality.Extensions;
 using YesEquality.Helpers;
+using Telerik.Windows.Controls;
 
 namespace YesEquality.ViewModels
 {
@@ -72,6 +73,7 @@ namespace YesEquality.ViewModels
 
         protected override async void OnViewLoaded(object view)
         {
+            // Add reminders if not setup
             if (!ReminderHelper.IsSetup)
             {
                 ReminderHelper.Setup();
@@ -79,6 +81,14 @@ namespace YesEquality.ViewModels
 
             await Task.Delay(500);
             PrimaryAppBarVisible = true;
+
+            // Show badge tooltip once
+            if (SettingsHelper.ShowBadgeTooltip)
+            {
+                mainView = view as MainView;
+                RadToolTipService.Open(mainView.Logo);
+                SettingsHelper.ShowBadgeTooltip = false;
+            }
         }
 
         private List<Uri> createBadges(string path)
