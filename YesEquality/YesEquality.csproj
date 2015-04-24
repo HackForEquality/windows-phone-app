@@ -96,6 +96,9 @@
     </Compile>
     <Compile Include="Models\BadgeModel.cs" />
     <Compile Include="Models\SlideModel.cs" />
+    <Compile Include="Resources\Controls\BadgePicker.xaml.cs">
+      <DependentUpon>BadgePicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Controls\SlideItemTemplateSelector.cs" />
     <Compile Include="Resources\Controls\ThemeableBindableAppBar.cs" />
     <Compile Include="Resources\Controls\ViewFinder.xaml.cs">
@@ -134,6 +137,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Resources\Controls\BadgePicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Controls\ViewFinder.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

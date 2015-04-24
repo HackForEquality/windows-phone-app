@@ -27,7 +27,6 @@ namespace YesEquality.ViewModels
         private readonly IEventAggregator eventAggregator;
         private MainView mainView;
         private string imagePath;
-        private List<Uri> badgeList;
 
         public bool PrimaryAppBarVisible {get; set;}
         public bool SecondaryAppBarVisible { get; set; }
@@ -63,9 +62,10 @@ namespace YesEquality.ViewModels
             }
 
             // Create badge list
-            badgeList = new List<Uri>();
-            badgeList.AddRange(createBadges("/Resources/Assets/Badges/White/"));
-            badgeList.AddRange(createBadges("/Resources/Assets/Badges/Colour/"));
+            var badges = new List<Uri>();
+            badges.AddRange(createBadges("/Resources/Assets/Badges/White/"));
+            badges.AddRange(createBadges("/Resources/Assets/Badges/Colour/"));
+            mainView.BadgePicker.Badges = badges;
 
             // Preload view, hack to fix missing page transition when page is first viewed
             var cacheView = new InfoView();
@@ -86,7 +86,7 @@ namespace YesEquality.ViewModels
             if (SettingsHelper.ShowBadgeTooltip)
             {
                 mainView = view as MainView;
-                RadToolTipService.Open(mainView.Logo);
+                RadToolTipService.Open(mainView.BadgePicker);
                 SettingsHelper.ShowBadgeTooltip = false;
             }
         }
@@ -102,20 +102,7 @@ namespace YesEquality.ViewModels
 
             return badges;
         }
-
-        private Uri nextBadge()
-        {
-            var index = badgeList.IndexOf(SelectedBadge);
-            if (badgeList.Count == (index+1))
-            {
-                return badgeList[0];
-            }
-            else
-            {
-                return badgeList[index+1];
-            }
-        }
-
+        
         #region Commands
         public bool CanTakePicture
         {
@@ -135,7 +122,7 @@ namespace YesEquality.ViewModels
 
             // Add logo to image
             Rect cRect = new Rect(0, 0, preview.PixelWidth, preview.PixelHeight);
-            WriteableBitmap logoBitmap = new WriteableBitmap(mainView.PreviewGrid, null);
+            WriteableBitmap logoBitmap = new WriteableBitmap(mainView.BadgePicker, null);
             preview.Blit(cRect, logoBitmap, cRect, WriteableBitmapExtensions.BlendMode.Alpha);
 
             // Update preview
@@ -179,13 +166,6 @@ namespace YesEquality.ViewModels
         public void GoToInfo()
         {
             navigationService.UriFor<InfoViewModel>().Navigate();
-        }
-
-        public async void NextBadge()
-        {
-            SelectedBadge = nextBadge();
-            var view = GetView() as MainView;
-            await view.ImageBounce.BeginAsync().ConfigureAwait(false);
         }
 
         public bool CanSwitchCamera
