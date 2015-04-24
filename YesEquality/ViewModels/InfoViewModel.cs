@@ -16,7 +16,6 @@ namespace YesEquality.ViewModels
         private readonly IEventAggregator eventAggregator;
         private readonly INavigationService navigationService;
         public ObservableCollection<SlideModel> SlideList { get; set; }
-        public bool ExpandAppBar { get; set; }
 
         public InfoViewModel(INavigationService navigationService, IEventAggregator eventAggregator)
         {
@@ -36,9 +35,7 @@ namespace YesEquality.ViewModels
             SlideList.Add(new SlideModel() { Title = "On May 22nd", ImagePath = new Uri("/Resources/Assets/Info/9_Student.png", UriKind.Relative), ImageText = "Polling stations will be open from 7am to 10pm.", BackgroundColour = "#7bc043" });
             //SlideList.Add(new InfoModel() { Title = "Away at work?", ImagePath = new Uri("/Resources/Assets/Info/10_AtWork.png", UriKind.Relative), ImageText = "You can vote by post too!", BackgroundColour = "#7f4097" });
             //SlideList.Add(new InfoModel() { Title = "Changed address?", ImagePath = new Uri("/Resources/Assets/Info/11_Address.png", UriKind.Relative), ImageText = "You can vote by post", BackgroundColour = "#1b75bb" });
-            SlideList.Add(new SlideModel() { Title = "And remember...", ImagePath = new Uri("/Resources/Assets/Badges/White/YES.png", UriKind.Relative), ImageText = "Your vote counts. Don't forget to use it.", BackgroundColour = "#666666" });
-
-            ExpandAppBar = false;
+            SlideList.Add(new SlideModel() { Title = "And remember...", ImagePath = new Uri("/Resources/Assets/CampaignLogo.png", UriKind.Relative), ImageText = "Your vote counts. Don't forget to use it.", BackgroundColour = "#ffffff", TextColour = "Black" });
         }
 
         protected override void OnViewReady(object view)
@@ -46,20 +43,6 @@ namespace YesEquality.ViewModels
         }
 
         #region Commands
-        public void SlideSelectionChanged(SelectionChangedEventArgs e)
-        {
-            var item = e.AddedItems[0] as SlideModel;
-
-            // Only show browser button when on a certain slide
-            if (item.ImageText.Contains("checktheregister"))
-            {
-                ExpandAppBar = true;
-            }
-            else
-            {
-                ExpandAppBar = false;
-            }
-        }
         public void PaginationLoaded(RadPaginationControl pagination)
         {
             // Show pagination control after loading
@@ -67,11 +50,18 @@ namespace YesEquality.ViewModels
             pagination.Visibility = Visibility.Visible;
         }
 
-        public void GoToWebsite()
+        public void OpenLink(SlideModel slide)
         {
-            eventAggregator.RequestTask<WebBrowserTask>(x => { x.Uri = new Uri("https://www.checktheregister.ie/"); });
+            if (slide.ImageText.Contains("checktheregister"))
+            {
+                eventAggregator.RequestTask<WebBrowserTask>(x => { x.Uri = new Uri("https://www.checktheregister.ie/"); });
+            }
+            else
+            {
+                eventAggregator.RequestTask<WebBrowserTask>(x => { x.Uri = new Uri("http://www.checktheregister.ie/appforms/RFA_English_Form.pdf"); });
+            }
         }
-
+        
         public void Handle(WebBrowserTask message)
         {
         }

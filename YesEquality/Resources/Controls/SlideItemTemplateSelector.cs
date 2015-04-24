@@ -7,20 +7,20 @@ namespace YesEquality.Controls
 {
     public class SlideItemTemplateSelector : DataTemplateSelector
     {
-        public DataTemplate LinkItemTemplateTwo { get; set; }
-        public DataTemplate NormalItemTemplate { get; set; }
+        public DataTemplate LinkTemplate { get; set; }
+        public DataTemplate DefaultTemplate { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             var currentItem = item as SlideModel;
-            if(currentItem == null) return NormalItemTemplate;
+            if (currentItem == null) return DefaultTemplate;
 
             if (currentItem.Type == SlideModelType.HasLink)
             {
-                return LinkItemTemplateTwo;
+                return LinkTemplate;
             }
-            
-            return NormalItemTemplate;
+
+            return DefaultTemplate;
         }
     }
 }
