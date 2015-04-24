@@ -10,9 +10,9 @@
     d:DesignHeight="480" d:DesignWidth="480">
     
     <Grid>
-        <Canvas Name="viewfinderCanvas" >
+        <Canvas Name="ViewFinderCanvas" >
             <Canvas.Background>
-                <VideoBrush x:Name="viewfinderBrush"  Stretch="None" />
+                <VideoBrush x:Name="ViewFinderBrush" Stretch="None" />
             </Canvas.Background>
         </Canvas>
     </Grid>

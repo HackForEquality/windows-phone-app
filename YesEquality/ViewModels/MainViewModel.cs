@@ -16,6 +16,7 @@ using YesEquality.Models;
 using YesEquality.Views;
 using YesEquality.Extensions;
 using YesEquality.Helpers;
+using Telerik.Windows.Controls;
 
 namespace YesEquality.ViewModels
 {
@@ -72,6 +73,7 @@ namespace YesEquality.ViewModels
 
         protected override async void OnViewLoaded(object view)
         {
+            // Add reminders if not setup
             if (!ReminderHelper.IsSetup)
             {
                 ReminderHelper.Setup();
@@ -79,6 +81,14 @@ namespace YesEquality.ViewModels
 
             await Task.Delay(500);
             PrimaryAppBarVisible = true;
+
+            // Show badge tooltip once
+            if (SettingsHelper.ShowBadgeTooltip)
+            {
+                mainView = view as MainView;
+                RadToolTipService.Open(mainView.Logo);
+                SettingsHelper.ShowBadgeTooltip = false;
+            }
         }
 
         private List<Uri> createBadges(string path)
@@ -121,31 +131,27 @@ namespace YesEquality.ViewModels
             WriteableBitmap preview = new WriteableBitmap(mainView.ViewFinder, null);
             mainView.ViewFinderPreview.Source = preview;
 
-            // Take picture
-            var picStream = await mainView.ViewFinder.TakePicture();
-            var pic = new WriteableBitmap(480, 640).FromStream(picStream);
-
-            // Crop
-            var croppedPic = pic.Crop(0, 80, 480, 480);
+            await Task.Delay(300);
 
             // Add logo to image
-            Rect cRect = new Rect(0, 0, pic.PixelWidth, pic.PixelHeight);
+            Rect cRect = new Rect(0, 0, preview.PixelWidth, preview.PixelHeight);
             WriteableBitmap logoBitmap = new WriteableBitmap(mainView.PreviewGrid, null);
-            croppedPic.Blit(cRect, logoBitmap, cRect, WriteableBitmapExtensions.BlendMode.Alpha);
+            preview.Blit(cRect, logoBitmap, cRect, WriteableBitmapExtensions.BlendMode.Alpha);
 
             // Update preview
-            mainView.Preview.Source = croppedPic;
+            mainView.Preview.Source = preview;
 
+            // Swtich appbar
             PrimaryAppBarVisible = false;
             SecondaryAppBarVisible = !PrimaryAppBarVisible;
 
             // Save
-            var picture = croppedPic.SaveToMediaLibrary("Picture.jpg");
+            var picture = preview.SaveToMediaLibrary("Picture.jpg");
             imagePath = picture.GetPath();
 
             // Cleanup
-            pic = null;
-            croppedPic = null;
+            preview = null;
+            logoBitmap = null;
         }
 
         public bool CanCacel

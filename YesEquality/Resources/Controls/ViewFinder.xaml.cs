@@ -112,16 +112,16 @@ namespace YesEquality.Controls
                 {
                     commandRunning = true;
 
-                    //compute vector between preview picture center and Inverted transformation center
-                    var tmp = viewfinderBrush.Transform.Inverse.TransformBounds(new Rect(new Point(), viewfinderCanvas.RenderSize));
+                    // Compute vector between preview picture center and inverted transformation center
+                    var tmp = ViewFinderBrush.Transform.Inverse.TransformBounds(new Rect(new Point(), ViewFinderCanvas.RenderSize));
                     var dx = captureDevice.PreviewResolution.Width / 2 - (tmp.X + tmp.Width / 2);
                     var dy = captureDevice.PreviewResolution.Height / 2 - (tmp.Y + tmp.Height / 2);
         
-                    //invert tap position
+                    // Invert tap position
                     var p =  e.GetPosition(this);
-                    var pInPreview = viewfinderBrush.Transform.Inverse.Transform(p);
+                    var pInPreview = ViewFinderBrush.Transform.Inverse.Transform(p);
 
-                    //transform inverted position to picture reference
+                    // Transform inverted position to picture reference
                     double X = pInPreview.X + dx;
                     double Y = pInPreview.Y + dy;
 
@@ -134,7 +134,8 @@ namespace YesEquality.Controls
                     captureDevice.FocusRegion = new Windows.Foundation.Rect(
                         new Windows.Foundation.Point(X, Y),
                         new Windows.Foundation.Size());
-                    
+
+                    captureDevice.SetProperty(KnownCameraPhotoProperties.FlashMode, FlashState.Off);
                     await captureDevice.FocusAsync();
                 }
                 catch (Exception)
@@ -164,7 +165,7 @@ namespace YesEquality.Controls
                 {
                     initCamera();
                 }
-}
+            }
         }
 
         private void setPageOrientation(PageOrientation orientation)
@@ -217,7 +218,7 @@ namespace YesEquality.Controls
                 
                 var SupportedResolutions = PhotoCaptureDevice.GetAvailableCaptureResolutions(sensorLocation).ToArray();
                 captureDevice = await PhotoCaptureDevice.OpenAsync(sensorLocation, SupportedResolutions.Last());
-                viewfinderBrush.SetSource(captureDevice);
+                ViewFinderBrush.SetSource(captureDevice);
                 computeVideoBrushTransform();
             }
             finally
@@ -236,23 +237,23 @@ namespace YesEquality.Controls
             var tmptransform = new RotateTransform() { Angle = orientationAngle + captureDevice.SensorRotationInDegrees };
             var previewSize = tmptransform.TransformBounds(new Rect(new Point(), new Size(captureDevice.PreviewResolution.Width, captureDevice.PreviewResolution.Height)));
 
-            double s1 = viewfinderCanvas.ActualWidth / previewSize.Width;
-            double s2 = viewfinderCanvas.ActualHeight / previewSize.Height;
+            double s1 = ViewFinderCanvas.ActualWidth / previewSize.Width;
+            double s2 = ViewFinderCanvas.ActualHeight / previewSize.Height;
             
             double scale = mode == StrechMode.UniformFill ? Math.Max(s1, s2) : Math.Min(s1, s2);
 
             var t = new TransformGroup();
             if (sensorLocation == CameraSensorLocation.Front)
             {
-                t.Children.Add(new CompositeTransform() { Rotation = -(orientationAngle + captureDevice.SensorRotationInDegrees), CenterX = viewfinderCanvas.ActualWidth / 2, CenterY = viewfinderCanvas.ActualHeight / 2, ScaleX = scale, ScaleY = scale });
-                t.Children.Add(new ScaleTransform() { ScaleX = -1, CenterX = viewfinderCanvas.ActualWidth / 2, CenterY = viewfinderCanvas.ActualHeight / 2 });
+                t.Children.Add(new CompositeTransform() { Rotation = -(orientationAngle + captureDevice.SensorRotationInDegrees), CenterX = ViewFinderCanvas.ActualWidth / 2, CenterY = ViewFinderCanvas.ActualHeight / 2, ScaleX = scale, ScaleY = scale });
+                t.Children.Add(new ScaleTransform() { ScaleX = -1, CenterX = ViewFinderCanvas.ActualWidth / 2, CenterY = ViewFinderCanvas.ActualHeight / 2 });
             }
             else
             {
-                t.Children.Add(new CompositeTransform() { Rotation = orientationAngle + captureDevice.SensorRotationInDegrees, CenterX = viewfinderCanvas.ActualWidth / 2, CenterY = viewfinderCanvas.ActualHeight / 2, ScaleX = scale, ScaleY = scale });
+                t.Children.Add(new CompositeTransform() { Rotation = orientationAngle + captureDevice.SensorRotationInDegrees, CenterX = ViewFinderCanvas.ActualWidth / 2, CenterY = ViewFinderCanvas.ActualHeight / 2, ScaleX = scale, ScaleY = scale });
             }
           
-            viewfinderBrush.Transform = t;
+            ViewFinderBrush.Transform = t;
         }
         public async Task<CameraFocusStatus> FocusAsync()
         {
@@ -282,7 +283,7 @@ namespace YesEquality.Controls
             {
                 return null;
             }
-                
+
             try
             {
                 commandRunning = true;
