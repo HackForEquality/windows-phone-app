@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Diagnostics;
 using System.Windows.Media.Animation;
+using Telerik.Windows.Controls;
 
 namespace YesEquality.Controls
 {
@@ -50,7 +51,7 @@ namespace YesEquality.Controls
                 Badge.Source = new BitmapImage(value);
             }
         }
-
+       
         public BadgePicker()
         {
             InitializeComponent();
@@ -58,8 +59,13 @@ namespace YesEquality.Controls
             setupSnapPoints();
 
             // Set default badge position
-            Canvas.SetLeft(Badge, points[2].X);
-            Canvas.SetTop(Badge, points[2].Y);
+            Canvas.SetLeft(Container, points[2].X);
+            Canvas.SetTop(Container, points[2].Y);
+        }
+
+        public void ShowTooltip()
+        {
+            RadToolTipService.Open(Container);
         }
 
         private void setupSnapPoints()
@@ -90,7 +96,7 @@ namespace YesEquality.Controls
             await BadgeBounce.BeginAsync().ConfigureAwait(false);
         }
 
-        private async void Badge_ManipulationCompleted(object sender, System.Windows.Input.ManipulationCompletedEventArgs e)
+        private async void Container_ManipulationCompleted(object sender, System.Windows.Input.ManipulationCompletedEventArgs e)
         {
             if (e.TotalManipulation.Translation.X == 0 && e.TotalManipulation.Translation.Y == 0) return;
 
@@ -117,8 +123,11 @@ namespace YesEquality.Controls
             //Canvas.SetTop(element, nearest.Y);
         }
 
-        private void Badge_ManipulationDelta(object sender, System.Windows.Input.ManipulationDeltaEventArgs e)
+        private void Container_ManipulationDelta(object sender, System.Windows.Input.ManipulationDeltaEventArgs e)
         {
+            // Close tooltip if open when dragging starts
+            RadToolTipService.Close();
+
             FrameworkElement element = sender as FrameworkElement;
             double left = Canvas.GetLeft(element);
             double top = Canvas.GetTop(element);

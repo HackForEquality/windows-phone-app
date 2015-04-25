@@ -16,7 +16,6 @@ using YesEquality.Models;
 using YesEquality.Views;
 using YesEquality.Extensions;
 using YesEquality.Helpers;
-using Telerik.Windows.Controls;
 
 namespace YesEquality.ViewModels
 {
@@ -86,7 +85,7 @@ namespace YesEquality.ViewModels
             if (SettingsHelper.ShowBadgeTooltip)
             {
                 mainView = view as MainView;
-                RadToolTipService.Open(mainView.BadgePicker);
+                mainView.BadgePicker.ShowTooltip();
                 SettingsHelper.ShowBadgeTooltip = false;
             }
         }
