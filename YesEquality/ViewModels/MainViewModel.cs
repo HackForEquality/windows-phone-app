@@ -78,10 +78,10 @@ namespace YesEquality.ViewModels
         private List<Uri> createBadges(string path)
         {
             var badges = new List<Uri>();
-            badges.Add(new Uri(path + "YES.png", UriKind.Relative));
             badges.Add(new Uri(path + "YES_ImVoting.png", UriKind.Relative));
-            badges.Add(new Uri(path + "YES_Me.png", UriKind.Relative));
             badges.Add(new Uri(path + "YES_WeAreVoting.png", UriKind.Relative));
+            badges.Add(new Uri(path + "YES_Me.png", UriKind.Relative));
+            badges.Add(new Uri(path + "YES.png", UriKind.Relative));
             badges.Add(new Uri(path + "TA.png", UriKind.Relative));
 
             return badges;

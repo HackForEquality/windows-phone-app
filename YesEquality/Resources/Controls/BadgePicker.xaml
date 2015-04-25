@@ -9,7 +9,7 @@
     <UserControl.Resources>
         <Storyboard x:Name="BadgeBounce">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" Storyboard.TargetName="Badge">
-                <EasingDoubleKeyFrame Value="0.6" KeyTime="0:0:0.2" />
+                <EasingDoubleKeyFrame Value="0.5" KeyTime="0:0:0.1" />
                 <EasingDoubleKeyFrame Value="1" KeyTime="00:00:0.4">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <ElasticEase Oscillations="1" EasingMode="EaseOut" />
@@ -18,7 +18,7 @@
             </DoubleAnimationUsingKeyFrames>
 
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" Storyboard.TargetName="Badge">
-                <EasingDoubleKeyFrame Value="0.6" KeyTime="0:0:0.2" />
+                <EasingDoubleKeyFrame Value="0.5" KeyTime="0:0:0.1" />
                 <EasingDoubleKeyFrame Value="1" KeyTime="00:00:0.4">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <ElasticEase Oscillations="1" EasingMode="EaseOut" />
@@ -30,13 +30,13 @@
         <Storyboard x:Name="BadgeSnap">
             <DoubleAnimation x:Name="BadgeSnapX" Storyboard.TargetProperty="(Canvas.Left)" Storyboard.TargetName="Container" Duration="0:0:0.4">
                 <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut" />
+                    <CubicEase EasingMode="EaseInOut" />
                     </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
 
             <DoubleAnimation x:Name="BadgeSnapY" Storyboard.TargetProperty="(Canvas.Top)" Storyboard.TargetName="Container" Duration="0:0:0.4">
                 <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut" />
+                    <CubicEase EasingMode="EaseInOut" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
