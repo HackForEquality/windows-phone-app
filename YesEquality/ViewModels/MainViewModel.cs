@@ -29,7 +29,6 @@ namespace YesEquality.ViewModels
 
         public bool PrimaryAppBarVisible {get; set;}
         public bool SecondaryAppBarVisible { get; set; }
-        public Uri SelectedBadge { get; set; }
 
         public MainViewModel(INavigationService navigationService, IEventAggregator eventAggregator)
         {
@@ -45,20 +44,6 @@ namespace YesEquality.ViewModels
             mainView = view as MainView;
             mainView.ViewFinder.SensorLocation = CameraSensorLocation.Front;
             mainView.ViewFinder.Start();
-
-            // Use save logo selection
-            IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
-            if (settings.Contains("badge"))
-            {
-                SelectedBadge = settings["badge"] as Uri;
-            }
-            else
-            {
-                // Default
-                SelectedBadge = new Uri("/Resources/Assets/Badges/White/YES_ImVoting.png", UriKind.Relative);
-                settings["badge"] = SelectedBadge;
-                settings.Save();
-            }
 
             // Create badge list
             var badges = new List<Uri>();
@@ -93,11 +78,11 @@ namespace YesEquality.ViewModels
         private List<Uri> createBadges(string path)
         {
             var badges = new List<Uri>();
-            badges.Add(new Uri(path + "TA.png", UriKind.Relative));
             badges.Add(new Uri(path + "YES.png", UriKind.Relative));
             badges.Add(new Uri(path + "YES_ImVoting.png", UriKind.Relative));
             badges.Add(new Uri(path + "YES_Me.png", UriKind.Relative));
             badges.Add(new Uri(path + "YES_WeAreVoting.png", UriKind.Relative));
+            badges.Add(new Uri(path + "TA.png", UriKind.Relative));
 
             return badges;
         }
