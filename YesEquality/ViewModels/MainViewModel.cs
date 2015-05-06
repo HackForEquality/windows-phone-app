@@ -102,6 +102,7 @@ namespace YesEquality.ViewModels
             WriteableBitmap preview = new WriteableBitmap(mainView.ViewFinder, null);
             mainView.ViewFinderPreview.Source = preview;
 
+            mainView.HideShutterButton.Begin();
             await Task.Delay(300);
 
             // Add logo to image
@@ -137,6 +138,8 @@ namespace YesEquality.ViewModels
         {
             mainView.ViewFinderPreview.Source = null;
             mainView.Preview.Source = null;
+
+            mainView.ShowShutterButton.Begin();
 
             PrimaryAppBarVisible = true;
             SecondaryAppBarVisible = !PrimaryAppBarVisible;

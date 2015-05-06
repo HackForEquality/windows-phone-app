@@ -65,7 +65,7 @@ namespace YesEquality.Controls
 
         public void ShowTooltip()
         {
-            RadToolTipService.SetTimeout(Container, TimeSpan.FromSeconds(2);
+            RadToolTipService.SetTimeout(Container, TimeSpan.FromSeconds(2));
             RadToolTipService.Open(Container);
         }
 
