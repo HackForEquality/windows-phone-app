@@ -267,6 +267,7 @@ namespace YesEquality.Controls
                 commandRunning = true;
                 if (captureDevice != null && sensorLocation == CameraSensorLocation.Back)
                 {
+                    captureDevice.SetProperty(KnownCameraPhotoProperties.FlashMode, FlashState.Off);
                     return await captureDevice.FocusAsync();
                 }
             }

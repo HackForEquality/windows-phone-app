@@ -12,7 +12,32 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    shell:SystemTray.IsVisible="True" shell:SystemTray.Opacity="0.8">
+    shell:SystemTray.IsVisible="True" shell:SystemTray.Opacity="0.8"
+    cal:Message.Attach="[Event BackKeyPress] = [Action OnGoBack($eventArgs)]">
+    
+    <phone:PhoneApplicationPage.Resources>
+        <Storyboard x:Name="HideShutterButton">
+            <DoubleAnimation Storyboard.TargetName="TakePicture" Storyboard.TargetProperty="(UIElement.Opacity)" From="1" To="0.1" Duration="00:00:0.3"/>
+        </Storyboard>
+        <Storyboard x:Name="ShowShutterButton">
+            <DoubleAnimation Storyboard.TargetName="TakePicture" Storyboard.TargetProperty="(UIElement.Opacity)" From="0.1" To="1" Duration="00:00:0.3"/>
+        </Storyboard>
+        <Storyboard x:Name="CameraFlash">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ViewFinderFlash" Storyboard.TargetProperty="(UIElement.Opacity)" >
+                <EasingDoubleKeyFrame Value="0" KeyTime="0" />
+                <EasingDoubleKeyFrame Value="1" KeyTime="00:00:0.3">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame Value="0" KeyTime="00:00:0.5">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut" />
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </phone:PhoneApplicationPage.Resources>
 
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
@@ -49,11 +74,15 @@
             <Image Name="ViewFinderPreview" />
             <custom:BadgePicker Name="BadgePicker" />
             <Image Name="Preview" />
+            <Rectangle x:Name="ViewFinderFlash" Fill="White" Opacity="0" />
         </Grid>
 
-        <!-- Camera button -->
+        <!-- Shutter button -->
         <Grid Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Button x:Name="TakePicture" Height="70" Width="70" Margin="0">
+                <Button.RenderTransform>
+                    <TranslateTransform/>
+                </Button.RenderTransform>
                 <Button.Template>
                     <ControlTemplate>
                         <Image Source="/Resources/Assets/Buttons/Camera.png"/>

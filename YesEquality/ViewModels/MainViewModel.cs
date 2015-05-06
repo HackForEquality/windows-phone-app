@@ -16,6 +16,7 @@ using YesEquality.Models;
 using YesEquality.Views;
 using YesEquality.Extensions;
 using YesEquality.Helpers;
+using System.ComponentModel;
 
 namespace YesEquality.ViewModels
 {
@@ -51,6 +52,17 @@ namespace YesEquality.ViewModels
             badges.AddRange(createBadges("/Resources/Assets/Badges/Colour/"));
             mainView.BadgePicker.Badges = badges;
 
+            // Handle hardware camera buttons
+            CameraButtons.ShutterKeyHalfPressed += async (s, e) =>
+            {
+                await mainView.ViewFinder.FocusAsync();
+            };
+
+            CameraButtons.ShutterKeyPressed += (s, e) =>
+            {
+                if (PrimaryAppBarVisible) TakePicture();
+            };
+
             // Preload view, hack to fix missing page transition when page is first viewed
             var cacheView = new InfoView();
         }
@@ -69,11 +81,19 @@ namespace YesEquality.ViewModels
             // Show badge tooltip once
             if (SettingsHelper.ShowBadgeTooltip)
             {
-                mainView = view as MainView;
                 mainView.BadgePicker.ShowTooltip();
                 SettingsHelper.ShowBadgeTooltip = false;
             }
         }
+
+        public void OnGoBack(CancelEventArgs e)
+        {
+            if (SecondaryAppBarVisible)
+            {
+                e.Cancel = true;
+                Cancel();
+            }
+        }  
 
         private List<Uri> createBadges(string path)
         {
@@ -102,6 +122,7 @@ namespace YesEquality.ViewModels
             WriteableBitmap preview = new WriteableBitmap(mainView.ViewFinder, null);
             mainView.ViewFinderPreview.Source = preview;
 
+            mainView.CameraFlash.Begin();
             mainView.HideShutterButton.Begin();
             await Task.Delay(300);
 
