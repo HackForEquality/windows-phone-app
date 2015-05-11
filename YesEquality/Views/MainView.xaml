@@ -74,7 +74,7 @@
             <Image Name="ViewFinderPreview" />
             <custom:BadgePicker Name="BadgePicker" />
             <Image Name="Preview" />
-            <Rectangle x:Name="ViewFinderFlash" Fill="White" Opacity="0" />
+            <Rectangle x:Name="ViewFinderFlash" Fill="White" Opacity="0" IsHitTestVisible="False" />
         </Grid>
 
         <!-- Shutter button -->
