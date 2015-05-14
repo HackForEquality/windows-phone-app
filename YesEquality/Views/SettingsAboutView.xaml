@@ -1,17 +1,78 @@
 ﻿<UserControl x:Class="YesEquality.Views.SettingsAboutView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
+    xmlns:control="clr-namespace:YesEquality.Resources"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
-    d:DesignHeight="480" d:DesignWidth="480">
+    Foreground="{StaticResource PhoneForegroundBrush}">
+    
+    <UserControl.Resources>
+        <!-- HyperlinkButton -->
+        <Style x:Key="AccentHyperlink" TargetType="HyperlinkButton">
+            <Setter Property="Foreground" Value="{StaticResource PhoneAccentBrush}" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeNormal}" />
+            <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="HyperlinkButton">
+                        <Border Background="{TemplateBinding Background}" Margin="{StaticResource PhoneHorizontalMargin}" Padding="{TemplateBinding Padding}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="MouseOver" />
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" Storyboard.TargetName="TextElement" Storyboard.TargetProperty="Opacity" To="0.5" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextElement" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <TextBlock x:Name="TextElement" Text="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+    </UserControl.Resources>
 
     <Grid Margin="0,0,12,0">
-        <TextBlock TextWrapping="Wrap" Foreground="{StaticResource PhoneSubtleBrush}" Margin="12, 0, 0, 0">
-                    <Run Text="About the app..."/>
-        </TextBlock>
+        <ScrollViewer>
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,0" HorizontalAlignment="Stretch">
+                    <StackPanel Background="{StaticResource PhoneAccentBrush}" Margin="0,0,0,0">
+                        <Image Stretch="UniformToFill" Height="173" Width="173" Source="/Resources/Assets/Tiles/Medium_336x336.png"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Yes Equality" Margin="12,-6,0,0" Style="{StaticResource PhoneTextTitle2Style}"/>
+                        <TextBlock Text="{Binding AppVersion}" Margin="12,-2,0,0" Style="{StaticResource PhoneTextSubtleStyle}" />
+                        <control:PhoneHyperlinkButton toolkit:TiltEffect.IsTiltEnabled="True" Style="{StaticResource AccentHyperlink}" Margin="-10,-10,0,0" Padding="10,10,10,10" HorizontalAlignment="Left" Tag="http://neilturner.com" Content="by Neil Turner"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Rate & Review -->
+                <control:PhoneHyperlinkButton toolkit:TiltEffect.IsTiltEnabled="True" Style="{StaticResource AccentHyperlink}" FontSize="25" Margin="-12,36,0,0" HorizontalAlignment="Left" Tag="review" Content="Rate &amp; Review"/>
+                <TextBlock TextWrapping="Wrap">
+                    <Run Text="If you like the app or you're just enthusiastic about the Yes Equality campaign, please consider leaving a review."/>
+                </TextBlock>
+
+                <!-- Support & Feedback -->
+                <control:PhoneHyperlinkButton toolkit:TiltEffect.IsTiltEnabled="True" Style="{StaticResource AccentHyperlink}" FontSize="25" Margin="-12,24,0,0" HorizontalAlignment="Left" Tag="mailto:support@neilturner.com" Content="Feedback &amp; Support"/>
+                <TextBlock TextWrapping="Wrap" Margin="0,0,0,5">
+                            <Run Text="Having an issue with the app? Think it can be improved?"/>
+                </TextBlock>
+
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>

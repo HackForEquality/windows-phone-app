@@ -19,7 +19,7 @@ namespace YesEquality.ViewModels
 
             // Setup pivot
             Items.Add(general);
-            //Items.Add(about);
+            Items.Add(about);
             ActivateItem(general);
         }
     }

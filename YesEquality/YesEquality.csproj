@@ -99,6 +99,7 @@
     <Compile Include="Resources\Controls\BadgePicker.xaml.cs">
       <DependentUpon>BadgePicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Controls\PhoneHyperlinkButton.cs" />
     <Compile Include="Resources\Controls\SlideItemTemplateSelector.cs" />
     <Compile Include="Resources\Controls\ThemeableBindableAppBar.cs" />
     <Compile Include="Resources\Controls\ViewFinder.xaml.cs">
@@ -189,7 +190,6 @@
     <Content Include="Resources\Assets\Badges\White\YES.png" />
     <Content Include="Resources\Assets\Buttons\Cancel.png" />
     <Content Include="Resources\Assets\Buttons\Ok.png" />
-    <Content Include="Resources\Assets\Buttons\Link.png" />
     <Content Include="Resources\Assets\Buttons\Info.png" />
     <Content Include="Resources\Assets\Buttons\Share.png" />
     <Content Include="Resources\Assets\Buttons\SwitchCamera.png" />

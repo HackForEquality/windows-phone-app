@@ -79,7 +79,7 @@
 
         <!-- Shutter button -->
         <Grid Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Button x:Name="TakePicture" Height="70" Width="70" Margin="0">
+            <Button x:Name="TakePicture" Height="70" Width="70" Margin="0" toolkit:TiltEffect.IsTiltEnabled="True">
                 <Button.RenderTransform>
                     <TranslateTransform/>
                 </Button.RenderTransform>
