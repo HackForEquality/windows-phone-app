@@ -92,7 +92,7 @@ namespace YesEquality.Helpers
 #if DEBUG
             var day = DateTime.Now.AddSeconds(120);
 #else
-            var day = new DateTime(2015, 05, 22, 7, 58, 00, 00, DateTimeKind.Utc);
+            var day = new DateTime(2015, 5, 22, 8, 00, 00, 00, DateTimeKind.Utc);
 #endif
 
             Microsoft.Phone.Scheduler.Reminder reminder = new Microsoft.Phone.Scheduler.Reminder("reminderOne");
@@ -134,7 +134,7 @@ namespace YesEquality.Helpers
 #if DEBUG
             var day = DateTime.Now.AddSeconds(20);
 #else
-            var day = new DateTime(2015, 05, 21, 7, 58, 00, 00, DateTimeKind.Utc);
+            var day = new DateTime(2015, 5, 21, 8, 00, 00, 00, DateTimeKind.Utc);
 #endif
 
             Microsoft.Phone.Scheduler.Reminder reminder = new Microsoft.Phone.Scheduler.Reminder("reminderTwo");

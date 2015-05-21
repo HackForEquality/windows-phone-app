@@ -98,6 +98,22 @@ namespace YesEquality.ViewModels
         private List<Uri> createBadges(string path)
         {
             var badges = new List<Uri>();
+#if DEBUG
+            var votingDay = new DateTime(2015, 4, 22, 0, 0, 0);
+#else
+            var votingDay = new DateTime(2015, 5, 22, 0, 0, 0);
+#endif
+            var result = DateTime.Compare(DateTime.UtcNow, votingDay);
+            
+            // After voting day
+            if (result >= 0)
+            {
+                badges.Add(new Uri(path + "ItsAYes.png", UriKind.Relative));
+                badges.Add(new Uri(path + "IVoted.png", UriKind.Relative));
+                badges.Add(new Uri(path + "YesThankYou.png", UriKind.Relative));
+            }
+            
+            // Before voting day
             badges.Add(new Uri(path + "YES_ImVoting.png", UriKind.Relative));
             badges.Add(new Uri(path + "YES_WeAreVoting.png", UriKind.Relative));
             badges.Add(new Uri(path + "YES_Me.png", UriKind.Relative));

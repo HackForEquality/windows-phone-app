@@ -178,12 +178,18 @@
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
     <Content Include="Resources\Assets\ApplicationIcon.png" />
+    <Content Include="Resources\Assets\Badges\Colour\ItsAYes.png" />
+    <Content Include="Resources\Assets\Badges\Colour\IVoted.png" />
     <Content Include="Resources\Assets\Badges\Colour\TA.png" />
     <Content Include="Resources\Assets\Badges\Colour\YES.png" />
+    <Content Include="Resources\Assets\Badges\Colour\YesThankYou.png" />
     <Content Include="Resources\Assets\Badges\Colour\YES_ImVoting.png" />
     <Content Include="Resources\Assets\Badges\Colour\YES_Me.png" />
     <Content Include="Resources\Assets\Badges\Colour\YES_WeAreVoting.png" />
+    <Content Include="Resources\Assets\Badges\White\ItsAYes.png" />
+    <Content Include="Resources\Assets\Badges\White\IVoted.png" />
     <Content Include="Resources\Assets\Badges\White\TA.png" />
+    <Content Include="Resources\Assets\Badges\White\YesThankYou.png" />
     <Content Include="Resources\Assets\Badges\White\YES_ImVoting.png" />
     <Content Include="Resources\Assets\Badges\White\YES_Me.png" />
     <Content Include="Resources\Assets\Badges\White\YES_WeAreVoting.png" />
@@ -234,8 +240,8 @@
       <HintPath>..\packages\WPtoolkit.4.2013.08.16\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PropertyChanged, Version=1.49.1.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
-      <HintPath>..\packages\PropertyChanged.Fody.1.49.1\Lib\portable-net4+sl4+wp8+win8+wpa81+MonoAndroid16+MonoTouch40\PropertyChanged.dll</HintPath>
+    <Reference Include="PropertyChanged, Version=1.50.0.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
+      <HintPath>..\packages\PropertyChanged.Fody.1.50.0\Lib\portable-net4+sl4+wp8+win8+wpa81+MonoAndroid16+MonoTouch40\PropertyChanged.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
