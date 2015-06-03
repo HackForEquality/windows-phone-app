@@ -11,7 +11,7 @@ namespace YesEquality.ViewModels
         public SettingsAboutViewModel()
         {
             DisplayName = "about";
-            AppVersion = "v1.1.0";
+            AppVersion = "v1.1.1";
         }
     }
 }

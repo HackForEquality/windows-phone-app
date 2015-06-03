@@ -94,6 +94,8 @@ namespace YesEquality.Helpers
 #else
             var day = new DateTime(2015, 5, 22, 8, 00, 00, 00, DateTimeKind.Utc);
 #endif
+            // Don't set reminders after date!
+            if (DateTime.Now.CompareTo(day) > 0) return;
 
             Microsoft.Phone.Scheduler.Reminder reminder = new Microsoft.Phone.Scheduler.Reminder("reminderOne");
             reminder.Title = "Today is the day";
@@ -136,6 +138,8 @@ namespace YesEquality.Helpers
 #else
             var day = new DateTime(2015, 5, 21, 8, 00, 00, 00, DateTimeKind.Utc);
 #endif
+            // Don't set reminders after date!
+            if (DateTime.Now.CompareTo(day) > 0) return;
 
             Microsoft.Phone.Scheduler.Reminder reminder = new Microsoft.Phone.Scheduler.Reminder("reminderTwo");
             reminder.Title = "Tomorrow is a big day";

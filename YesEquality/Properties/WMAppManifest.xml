@@ -4,7 +4,7 @@
   <Languages xmlns="">
     <Language code="en" />
   </Languages>
-  <App xmlns="" ProductID="{e5b8f9cc-d109-46e9-993c-a3e1f8b618e2}" Title="Yes Equality" RuntimeType="Silverlight" Version="1.1.0.0" Genre="apps.normal" Author="YesEquality" Description="Yes Equality is a nationwide campaign working to secure a Yes vote in the Marriage Equality Referendum" Publisher="Neil Turner" PublisherID="{2287443b-a588-48c8-b897-39f28cb46c74}">
+  <App xmlns="" ProductID="{e5b8f9cc-d109-46e9-993c-a3e1f8b618e2}" Title="Yes Equality" RuntimeType="Silverlight" Version="1.1.1.0" Genre="apps.normal" Author="YesEquality" Description="Yes Equality is a nationwide campaign working to secure a Yes vote in the Marriage Equality Referendum" Publisher="Neil Turner" PublisherID="{2287443b-a588-48c8-b897-39f28cb46c74}">
     <IconPath IsRelative="true" IsResource="false">Resources\Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_ISV_CAMERA" />
