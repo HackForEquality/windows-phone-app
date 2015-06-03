@@ -2,6 +2,7 @@
 using Microsoft.Phone.Controls;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -220,6 +221,10 @@ namespace YesEquality.Controls
                 captureDevice = await PhotoCaptureDevice.OpenAsync(sensorLocation, SupportedResolutions.Last());
                 ViewFinderBrush.SetSource(captureDevice);
                 computeVideoBrushTransform();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception while start camera device: " + ex.Message);
             }
             finally
             {
